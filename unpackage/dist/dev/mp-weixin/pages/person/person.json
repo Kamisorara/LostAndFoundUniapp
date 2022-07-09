@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "关于我",
+  "navigationBarBackgroundColor": "#f0eee1",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+  }
+}

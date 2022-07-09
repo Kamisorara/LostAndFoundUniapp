@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/chat/chat",
+    "pages/found/found",
+    "pages/lost/lost",
+    "pages/person/person",
+    "pages/detail/login"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#f0eee1",
+    "backgroundColor": "#dfdfdf"
+  },
+  "tabBar": {
+    "color": "#dfdfdf",
+    "selectedColor": "#ff7418",
+    "list": [
+      {
+        "text": "主页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/unselected/shequfuwu2.png",
+        "selectedIconPath": "static/selected/shequfuwu2.png"
+      },
+      {
+        "text": "寻物启事",
+        "pagePath": "pages/lost/lost",
+        "iconPath": "static/unselected/a-0_jichuchaxun.png",
+        "selectedIconPath": "static/selected/a-0_jichuchaxun.png"
+      },
+      {
+        "text": "拾物启示",
+        "pagePath": "pages/found/found",
+        "iconPath": "static/unselected/a-0_paisongyuqianshou.png",
+        "selectedIconPath": "static/selected/a-0_paisongyuqianshou.png"
+      },
+      {
+        "text": "对话",
+        "pagePath": "pages/chat/chat",
+        "iconPath": "static/unselected/xiaoxi.png",
+        "selectedIconPath": "static/selected/xiaoxi_full.png"
+      },
+      {
+        "text": "关于我",
+        "pagePath": "pages/person/person",
+        "iconPath": "static/unselected/wode.png",
+        "selectedIconPath": "static/selected/wode_full.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

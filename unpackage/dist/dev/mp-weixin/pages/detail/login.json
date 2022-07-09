@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "登录",
+  "navigationBarBackgroundColor": "#f0eee1",
+  "usingComponents": {
+    "u--input": "/uni_modules/uview-ui/components/u--input/u--input",
+    "u-radio-group": "/uni_modules/uview-ui/components/u-radio-group/u-radio-group",
+    "u-radio": "/uni_modules/uview-ui/components/u-radio/u-radio",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast"
+  }
+}

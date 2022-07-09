@@ -1,0 +1,20 @@
+{
+  "navigationBarTitleText": "LostAndFound主页",
+  "navigationBarBackgroundColor": "#f0eee1",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "u-sticky": "/uni_modules/uview-ui/components/u-sticky/u-sticky",
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-tag": "/uni_modules/uview-ui/components/u-tag/u-tag",
+    "u--image": "/uni_modules/uview-ui/components/u--image/u--image",
+    "u-loadmore": "/uni_modules/uview-ui/components/u-loadmore/u-loadmore",
+    "u-divider": "/uni_modules/uview-ui/components/u-divider/u-divider",
+    "u-back-top": "/uni_modules/uview-ui/components/u-back-top/u-back-top",
+    "index_index": "/common/component/index_index",
+    "index_recent": "/common/component/index_recent"
+  }
+}
