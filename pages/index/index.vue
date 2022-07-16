@@ -8,8 +8,15 @@
 			<view class="addNew" style="margin-top: 16rpx;margin-left: 20rpx;"><u-button @click="show = true" shape="circle" icon="plus-circle"></u-button></view>
 		</view>
 		<!-- 弹出层 -->
-		<u-popup :show="show" mode="top" @close="close" @open="open">
-			<view style="height: 300rpx;"><text>这是弹出层</text></view>
+		<u-popup :show="show" mode="top" :round="15" @close="close" @open="open">
+			<view style="height: 200rpx;display: flex;">
+				<view style="margin-top: 65rpx;margin-left:50rpx;">
+					<u-button @click="toCreateLostPage()" type="error" :plain="true" shape="circle" text="T_T我丢东西了"></u-button>
+				</view>
+				<view style="margin-top: 65rpx;margin-left: 80rpx;">
+					<u-button @click="toCreateFoundPage()" type="primary" :plain="true" shape="circle" text="(=~ω~=)我捡到东西啦"></u-button>
+				</view>
+			</view>
 		</u-popup>
 		<u-sticky>
 			<view class="tab" style="background-color: #FFFFFF;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx;">
@@ -162,6 +169,17 @@ export default {
 				}
 				this.pageNum++;
 			});
+		},
+		//前往创建界面
+		toCreateLostPage() {
+			uni.navigateTo({
+				url: '../detail/createNotice/createLostPage'
+			});
+		},
+		toCreateFoundPage() {
+			uni.navigateTo({
+				url: '../detail/createNotice/createFoundPage'
+			});
 		}
 	},
 	//组件
@@ -191,7 +209,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 page {
 	background-color: #f4f4f4;
 }

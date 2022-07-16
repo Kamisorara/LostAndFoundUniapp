@@ -25,4 +25,8 @@
 /* 透明度 */
 /* 文章场景相关 */
 /* uni.scss */
+page.data-v-390a77b4 {
+  background-color: #f4f4f4;
+  height: 100%;
+}
 

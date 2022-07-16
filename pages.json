@@ -46,6 +46,27 @@
 				"navigationBarTitleText": "登录",
 				"navigationBarBackgroundColor": "#f0eee1"
 			}
+		},
+		{
+			"path": "pages/detail/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationBarBackgroundColor": "#f0eee1"
+			}
+		},
+		{
+			"path": "pages/detail/createNotice/createLostPage",
+			"style": {
+				"navigationBarTitleText": "创建寻物启事",
+				"navigationBarBackgroundColor": "#aaffff"
+			}
+		},
+		{
+			"path": "pages/detail/createNotice/createFoundPage",
+			"style": {
+				"navigationBarTitleText": "创建拾物启示",
+				"navigationBarBackgroundColor": "#aaffff"
+			}
 		}
 	],
 	//全局配置

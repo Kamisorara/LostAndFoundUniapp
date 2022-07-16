@@ -1,5 +1,5 @@
 <template>
-	<view class="person" :style="{ backgroundImage: 'url(' + userInfo.photoUrl + ')' }" style="height:1600rpx">
+	<view class="person" :style="{ backgroundImage: 'url(' + userInfo.photoUrl + ')' }" style="height:100%">
 		<!-- 背景图片有bug暂时只能这么解决 -->
 		<view class="person-title" style="height: 1rpx;"></view>
 		<view class="person-main" style="margin-right: 20rpx;margin-left: 20rpx;background-color: #FFFFFF;height: 400rpx;border-radius: 20rpx;margin-top: 60rpx;">
@@ -42,7 +42,7 @@ export default {
 	methods: {
 		toLoginPage() {
 			uni.navigateTo({
-				url: '../detail/login'
+				url: '../detail/register'
 			});
 		},
 		//根据token获取用户信息
@@ -59,4 +59,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+page {
+	background-color: #f4f4f4;
+	height: 100%;
+}
+</style>
