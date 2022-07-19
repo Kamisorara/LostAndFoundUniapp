@@ -25,13 +25,14 @@
 /* 透明度 */
 /* 文章场景相关 */
 /* uni.scss */
-page {
+page.data-v-57280228 {
   background-color: #f4f4f4;
+  height: 100%;
 }
-.wrap {
+.wrap.data-v-57280228 {
   height: 200vh;
 }
-.post-message {
+.post-message.data-v-57280228 {
   height: 630rpx;
   background-color: #ffffff;
   margin-top: 20rpx;

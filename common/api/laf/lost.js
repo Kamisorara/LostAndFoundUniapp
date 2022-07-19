@@ -6,3 +6,8 @@ const urlHead = '/laf/lost'
 export function getAllLostNotice(pageNum, pageSize) {
 	return request.get(urlHead + '/get-all-lost' + '?pageNum=' + pageNum + '&pageSize=' + pageSize);
 }
+
+//创建寻物启事
+export function createLostNotice(data) {
+	return request.post(urlHead + "/create-lost-notice", data);
+}

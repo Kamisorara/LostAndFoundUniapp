@@ -147,6 +147,9 @@ export default {
 					console.log(res);
 					if (res.data.code === 200) {
 						this.userBasicInfo = res.data.data;
+					} else if (res.data.code === 401) {
+						removeToken('token');
+						this.toLoginPage();
 					}
 				})
 				.catch(err => {
@@ -180,6 +183,12 @@ export default {
 			uni.navigateTo({
 				url: '../detail/createNotice/createFoundPage'
 			});
+		},
+		//前往登录界面
+		toLoginPage() {
+			uni.navigateTo({
+				url: '../detail/login'
+			});
 		}
 	},
 	//组件
@@ -199,7 +208,7 @@ export default {
 			}
 			setTimeout(() => {
 				this.getRecentNoticeLists(this.pageNum, this.pageSize);
-			}, 1000);
+			}, 200);
 		}
 	},
 	onReady() {
@@ -212,6 +221,7 @@ export default {
 <style lang="scss" scoped>
 page {
 	background-color: #f4f4f4;
+	height: 100%;
 }
 .wrap {
 	height: 200vh;

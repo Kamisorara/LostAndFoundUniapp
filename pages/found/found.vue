@@ -18,17 +18,16 @@
 					</view>
 				</view>
 				<view class="found-user" style="display: flex;">
-					<view class="found-user-avatar">
-						<u-avatar :src="item.avatarUrl" size="25"></u-avatar>
+					<view class="found-user-avatar"><u-avatar :src="item.avatarUrl" size="25"></u-avatar></view>
+					<view class="found-user-name" style="margin-left: 20rpx;font-weight: 600;font-size: 25rpx;">
+						<text>{{ item.userName }}</text>
 					</view>
-					<view class="found-user-name" style="margin-left: 20rpx;font-weight: 600;font-size: 25rpx;"><text>{{ item.userName }}</text></view>
 					<view class="u-line-1" style="margin-left: 50rpx;color: darkgray;">
 						<text style="font-size:20rpx">浏览:</text>
 						<text style="font-size: 30rpx;margin-left: 5rpx;">0</text>
 					</view>
 				</view>
 			</view>
-			
 		</view>
 		<u-loadmore :status="status" :loading-text="loadMore.loadingText" :loadmore-text="loadMore.loadmoreText" :nomore-text="loadMore.nomoreText" icon />
 	</view>
@@ -89,10 +88,10 @@ export default {
 		}
 		setTimeout(() => {
 			this.getAllFoundLists(this.pageNum, this.pageSize);
-		}, 1000);
+		}, 200);
 	},
 	onReady() {
-		this.getAllFoundLists()
+		this.getAllFoundLists();
 	}
 };
 </script>

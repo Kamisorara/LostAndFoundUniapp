@@ -36,7 +36,12 @@
 		</view>
 		<!-- 紧急寻物启事 -->
 		<view class="urgency-lost-titile" style="margin-left: 35rpx;margin-top: 100rpx;font-weight: 700;font-size: 45rpx;color: #ff0000;"><text>我真的很急o (≧口≦)o</text></view>
-		<view class="urgency-lost" style="height: 450rpx;background-color: #ffffff;margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
+		<view
+			class="urgency-lost"
+			style="height: 450rpx;backdrop-filter: blur(40px);
+  color: #fff;
+  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
+		>
 			<view class="post-title" style="height: 50rpx;">
 				<view style="display: flex;margin-left: 530rpx;">
 					<text style="font-size: 30rpx;color: #939393;">查看全部</text>
@@ -55,7 +60,12 @@
 		</view>
 		<!-- 非紧急寻物启事 -->
 		<view class="non-urgency-lost-titile" style="margin-left: 35rpx;margin-top: 70rpx;font-weight: 700;font-size: 45rpx;color: #939393;"><text>我丢了东西T_T</text></view>
-		<view class="non-urgency-lost" style="height: 450rpx;background-color: #ffffff;margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
+		<view
+			class="non-urgency-lost"
+			style="height: 450rpx;backdrop-filter: blur(40px);
+  color: #fff;
+  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
+		>
 			<view class="post-title" style="height: 50rpx;">
 				<view style="display: flex;margin-left: 540rpx;">
 					<text style="font-size: 30rpx;color: #939393;">查看全部</text>
@@ -73,7 +83,12 @@
 			<text>我捡到东西啦(๑•̀ㅂ•́)و✧</text>
 		</view>
 
-		<view class="non-urgency-lost" style="height: 450rpx;background-color: #ffffff;margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
+		<view
+			class="non-urgency-lost"
+			style="height: 450rpx;backdrop-filter: blur(40px);
+  color: #fff;
+  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
+		>
 			<view class="post-title" style="height: 50rpx;">
 				<view style="display: flex;margin-left: 540rpx;">
 					<text style="font-size: 30rpx;color: #939393;">查看全部</text>

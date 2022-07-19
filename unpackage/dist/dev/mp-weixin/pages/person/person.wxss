@@ -29,4 +29,10 @@ page.data-v-390a77b4 {
   background-color: #f4f4f4;
   height: 100%;
 }
+.grid-text.data-v-390a77b4 {
+  font-size: 14px;
+  color: #909399;
+  padding: 10rpx 0 20rpx 0rpx;
+  box-sizing: border-box;
+}
 

@@ -85,17 +85,16 @@ export default {
 				}
 				this.pageNum++;
 			});
-		} 
+		}
 	},
 	// 加载更多
 	onReachBottom() {
-		
 		if (this.status == 'nomore') {
 			return;
 		}
 		setTimeout(() => {
 			this.getPageCommodities(this.pageNum, this.pageSize);
-		}, 1000);
+		}, 500);
 	},
 	created() {
 		this.getRecentNoticeLists();

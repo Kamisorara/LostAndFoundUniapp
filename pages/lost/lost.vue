@@ -89,7 +89,7 @@ export default {
 		}
 		setTimeout(() => {
 			this.getAllLostNoticeLists(this.pageNum, this.pageSize);
-		}, 1000);
+		}, 200);
 	},
 	onReady() {
 		this.getAllLostNoticeLists();

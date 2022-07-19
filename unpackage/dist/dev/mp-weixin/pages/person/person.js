@@ -98,10 +98,25 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 198))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 210))
     },
     uIcon: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 300))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 312))
+    },
+    uGrid: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-grid/u-grid */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-grid/u-grid")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-grid/u-grid.vue */ 564))
+    },
+    uGridItem: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-grid-item/u-grid-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-grid-item/u-grid-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-grid-item/u-grid-item.vue */ 572))
+    },
+    uBadge: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-badge/u-badge */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-badge/u-badge")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-badge/u-badge.vue */ 436))
+    },
+    uToast: function() {
+      return __webpack_require__.e(/*! import() | uni_modules/uview-ui/components/u-toast/u-toast */ "uni_modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-toast/u-toast.vue */ 343))
+    },
+    "u-Text": function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 388))
     }
   }
 } catch (e) {
@@ -125,6 +140,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 =
+    _vm.loginStatus.isLogin == true
+      ? _vm.__map(_vm.baseList, function(baseListItem, baseListIndex) {
+          var $orig = _vm.__get_orig(baseListItem)
+
+          var a0 =
+            _vm.badgeList[baseListIndex] != 0
+              ? {
+                  paddingTop: 20 + "rpx"
+                }
+              : null
+          var a1 =
+            _vm.badgeList[baseListIndex] === 0
+              ? {
+                  paddingTop: 20 + "rpx"
+                }
+              : null
+          return {
+            $orig: $orig,
+            a0: a0,
+            a1: a1
+          }
+        })
+      : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -182,7 +229,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _person = __webpack_require__(/*! @/common/api/laf/person.js */ 180); //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _person = __webpack_require__(/*! @/common/api/laf/person.js */ 180);
+var _token = __webpack_require__(/*! @/utils/token.js */ 144); //
 //
 //
 //
@@ -205,12 +287,71 @@ var _person = __webpack_require__(/*! @/common/api/laf/person.js */ 180); //
 //
 //
 //
-var _default = { name: 'person', data: function data() {return { //背景图片
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'person', data: function data() {return { //登录状态
+      loginStatus: { isLogin: false, userId: 0 }, //背景图片
       imageURL: 'https://img2.baidu.com/it/u=2985725512,645211557&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1657213200&t=bf2b60bfd8a9ca7c5f15f09f4be3af91', //用户信息
-      userInfo: { id: '001', userName: 'Kamisora', helpTimes: 0, avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png', photoUrl: 'https://img1.baidu.com/it/u=2450882350,2728090557&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656781200&t=39bc271d8dd1398fdd48487c355f5423' } };}, methods: { toLoginPage: function toLoginPage() {uni.navigateTo({ url: '../detail/register' });}, //根据token获取用户信息
-    getUserDetailInfoByToken: function getUserDetailInfoByToken() {var _this = this;(0, _person.getUserDetailInfo)().then(function (res) {console.log(res);
-        _this.userInfo = res.data.data;
+      userInfo: { id: '001', userName: 'Kamisora', helpTimes: 0, avatarUrl: '', photoUrl: 'https://img0.baidu.com/it/u=3453439557,3514241062&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=729' }, //宫格布局列表
+      baseList: [{ name: 'tags-fill', title: '我发布的' }, { name: 'clock-fill', title: '待处理' }, { name: 'checkmark-circle-fill', title: '我帮助的' }], //宫格徽标类型列表
+      badgeTypeList: [{ type: 'primary' }, { type: 'warning' }, { type: 'success' }], //宫格徽标
+      badgeList: [] };}, methods: { //前往登录界面
+    toLoginPage: function toLoginPage() {uni.navigateTo({ url: '../detail/login' });}, //前往注册界面
+    toRegisterPage: function toRegisterPage() {uni.navigateTo({ url: '../detail/register' });}, //获取用户启示相关徽标值
+    UserNoticeBadgeValue: function UserNoticeBadgeValue() {var _this = this;(0, _person.getUserNoticeBadgeValue)().then(function (res) {
+        console.log(res);
+        _this.badgeList = res.data.data;
       });
+    },
+    //根据token获取用户信息
+    getUserDetailInfoByToken: function getUserDetailInfoByToken() {var _this2 = this;
+      (0, _person.getUserDetailInfo)().then(function (res) {
+        console.log(res);
+        if (res.data.code === 200) {
+          _this2.loginStatus.isLogin = true;
+          _this2.userInfo = res.data.data;
+          _this2.UserNoticeBadgeValue();
+        } else if (res.data.code === 401) {
+          (0, _token.removeToken)('token');
+          _this2.loginStatus.isLogin = false;
+        }
+      });
+    },
+    //测试点击事件
+    click: function click(name) {
+      this.$refs.uToast.success("\u70B9\u51FB\u4E86\u7B2C".concat(name, "\u4E2A"));
     } },
 
   onReady: function onReady() {

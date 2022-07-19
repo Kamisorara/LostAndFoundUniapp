@@ -4,6 +4,11 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
-    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-grid": "/uni_modules/uview-ui/components/u-grid/u-grid",
+    "u-grid-item": "/uni_modules/uview-ui/components/u-grid-item/u-grid-item",
+    "u-badge": "/uni_modules/uview-ui/components/u-badge/u-badge",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text"
   }
 }

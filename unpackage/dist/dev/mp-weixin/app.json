@@ -6,7 +6,9 @@
     "pages/lost/lost",
     "pages/person/person",
     "pages/detail/login",
-    "pages/detail/register"
+    "pages/detail/register",
+    "pages/detail/createNotice/createLostPage",
+    "pages/detail/createNotice/createFoundPage"
   ],
   "subPackages": [],
   "window": {
@@ -51,6 +53,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
