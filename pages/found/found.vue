@@ -8,7 +8,7 @@
 				:class="{ 'position-left': (index + 1) % 2 != 0, 'position-right': (index + 1) % 2 == 0 }"
 				style="background-color: #FFFFFF;height:500rpx;width: 345rpx;border-radius: 20rpx;"
 			>
-				<view class="found-img" style="margin: auto;margin-top:10rpx;height: 370rpx;width:320rpx;background-color: antiquewhite;">
+				<view @click="toNoticeDetailPage(item.id)" class="found-img" style="margin: auto;margin-top:10rpx;height: 370rpx;width:320rpx;background-color: antiquewhite;">
 					<u--image :showLoading="true" :src="item.lafPhotoUrl" width="320rpx" height="370rpx"></u--image>
 				</view>
 				<view class="found-text" style="display: flex;">
@@ -63,6 +63,12 @@ export default {
 		};
 	},
 	methods: {
+		//前往启示详情界面
+		toNoticeDetailPage(noticeId) {
+			uni.navigateTo({
+				url: '../detail/noticeDetail/noticeDetail' + '?id=' + noticeId
+			});
+		},
 		// （懒加载）列表
 		async getAllFoundLists() {
 			await getAllFoundList(this.pageNum, this.pageSize).then(async res => {

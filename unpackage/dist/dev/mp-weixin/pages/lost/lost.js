@@ -164,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));
 
 
 
@@ -230,6 +230,12 @@ var _lost = __webpack_require__(/*! @/common/api/laf/lost.js */ 171);function _i
 
   },
   methods: {
+    //前往启示详情界面
+    toNoticeDetailPage: function toNoticeDetailPage(noticeId) {
+      uni.navigateTo({
+        url: '../detail/noticeDetail/noticeDetail' + '?id=' + noticeId });
+
+    },
     // （懒加载）列表
     getAllLostNoticeLists: function getAllLostNoticeLists() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
                   (0, _lost.getAllLostNotice)(_this.pageNum, _this.pageSize).then( /*#__PURE__*/function () {var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
@@ -260,6 +266,7 @@ var _lost = __webpack_require__(/*! @/common/api/laf/lost.js */ 171);function _i
   onReady: function onReady() {
     this.getAllLostNoticeLists();
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
