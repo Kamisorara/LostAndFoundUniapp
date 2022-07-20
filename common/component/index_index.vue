@@ -53,7 +53,9 @@
 						:key="index"
 						style="height: 180rpx;background-color: #e4e6ca;width: 340rpx;margin-left: 12rpx;margin-top: 20rpx;"
 					>
-						<view style="margin: 5rpx;"><u--image :showLoading="true" :src="item.lafPhotoUrl" width="330rpx" height="170rpx"></u--image></view>
+						<view @click="toNoticeDetailPage(item.id)" style="margin: 5rpx;">
+							<u--image :showLoading="true" :src="item.lafPhotoUrl" width="330rpx" height="170rpx"></u--image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -73,7 +75,9 @@
 				</view>
 				<view style="display: flex;flex-wrap: wrap;">
 					<view v-for="(item, index) in lostList" :key="index" style="height: 180rpx;background-color: #e4e6ca;width: 340rpx;margin-left: 12rpx;margin-top: 20rpx;">
-						<view style="margin: 5rpx;"><u--image :showLoading="true" :src="item.lafPhotoUrl" width="330rpx" height="170rpx"></u--image></view>
+						<view @click="toNoticeDetailPage(item.id)" style="margin: 5rpx;">
+							<u--image :showLoading="true" :src="item.lafPhotoUrl" width="330rpx" height="170rpx"></u--image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -96,7 +100,9 @@
 				</view>
 				<view style="display: flex;flex-wrap: wrap;">
 					<view v-for="(item, index) in foundList" :key="index" style="height: 180rpx;background-color: #e4e6ca;width: 340rpx;margin-left: 12rpx;margin-top: 20rpx;">
-						<view style="margin: 5rpx;"><u--image :showLoading="true" :src="item.lafPhotoUrl" width="330rpx" height="170rpx"></u--image></view>
+						<view @click="toNoticeDetailPage(item.id)" style="margin: 5rpx;">
+							<u--image :showLoading="true" :src="item.lafPhotoUrl" width="330rpx" height="170rpx"></u--image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -161,6 +167,12 @@ export default {
 		};
 	},
 	methods: {
+		//前往启示详情界面
+		toNoticeDetailPage(noticeId) {
+			uni.navigateTo({
+				url: '/pages/detail/noticeDetail/noticeDetail' + '?id=' + noticeId
+			});
+		},
 		//获取公告板
 		getBoardLists() {
 			getBoardList().then(res => {

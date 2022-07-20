@@ -322,6 +322,18 @@ var _index = __webpack_require__(/*! @/common/api/laf/index.js */ 145);function 
 
   },
   methods: {
+    //前往搜索界面
+    toSearchPage: function toSearchPage() {
+      uni.navigateTo({
+        url: '../detail/searchPage' });
+
+    },
+    //前往个人界面
+    toPersonalPage: function toPersonalPage() {
+      uni.navigateTo({
+        url: '../detail/personDetail/personalPage' });
+
+    },
     //切换首页和最近
     changeCurrentChoise: function changeCurrentChoise(item) {
       this.currentChoise = item.index;

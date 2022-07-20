@@ -104,19 +104,16 @@ try {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 312))
     },
     uGrid: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-grid/u-grid */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-grid/u-grid")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-grid/u-grid.vue */ 564))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-grid/u-grid */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-grid/u-grid")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-grid/u-grid.vue */ 321))
     },
     uGridItem: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-grid-item/u-grid-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-grid-item/u-grid-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-grid-item/u-grid-item.vue */ 572))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-grid-item/u-grid-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-grid-item/u-grid-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-grid-item/u-grid-item.vue */ 329))
     },
     uBadge: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-badge/u-badge */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-badge/u-badge")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-badge/u-badge.vue */ 436))
-    },
-    uToast: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uview-ui/components/u-toast/u-toast */ "uni_modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-toast/u-toast.vue */ 343))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-badge/u-badge */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-badge/u-badge")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-badge/u-badge.vue */ 337))
     },
     "u-Text": function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 388))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 352))
     }
   }
 } catch (e) {
@@ -262,10 +259,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _person = __webpack_require__(/*! @/common/api/laf/person.js */ 180);
 var _token = __webpack_require__(/*! @/utils/token.js */ 144); //
-//
 //
 //
 //
@@ -327,10 +322,41 @@ var _default = { name: 'person', data: function data() {return { //登录状态
       userInfo: { id: '001', userName: 'Kamisora', helpTimes: 0, avatarUrl: '', photoUrl: 'https://img0.baidu.com/it/u=3453439557,3514241062&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=729' }, //宫格布局列表
       baseList: [{ name: 'tags-fill', title: '我发布的' }, { name: 'clock-fill', title: '待处理' }, { name: 'checkmark-circle-fill', title: '我帮助的' }], //宫格徽标类型列表
       badgeTypeList: [{ type: 'primary' }, { type: 'warning' }, { type: 'success' }], //宫格徽标
-      badgeList: [] };}, methods: { //前往登录界面
-    toLoginPage: function toLoginPage() {uni.navigateTo({ url: '../detail/login' });}, //前往注册界面
-    toRegisterPage: function toRegisterPage() {uni.navigateTo({ url: '../detail/register' });}, //获取用户启示相关徽标值
-    UserNoticeBadgeValue: function UserNoticeBadgeValue() {var _this = this;(0, _person.getUserNoticeBadgeValue)().then(function (res) {
+      badgeList: [], //跳转页面名称
+      pageNameList: [{ name: 'myReleased' }, { name: 'myWaiting' }, { name: 'myHelped' }] };}, methods: {
+    //前往个人中心
+    toPersonalPage: function toPersonalPage() {
+      uni.navigateTo({
+        url: '../detail/personDetail/personalPage' });
+
+    },
+    //前往设置界面
+    toSettingPage: function toSettingPage() {
+      uni.navigateTo({
+        url: '../detail/personDetail/settingPage' });
+
+    },
+    //前往宫格界面界面
+    toMyPage: function toMyPage(pageName) {
+      uni.navigateTo({
+        url: '../detail/personDetail/' + pageName });
+
+    },
+    //前往登录界面
+    toLoginPage: function toLoginPage() {
+      uni.navigateTo({
+        url: '../detail/login' });
+
+    },
+    //前往注册界面
+    toRegisterPage: function toRegisterPage() {
+      uni.navigateTo({
+        url: '../detail/register' });
+
+    },
+    //获取用户启示相关徽标值
+    UserNoticeBadgeValue: function UserNoticeBadgeValue() {var _this = this;
+      (0, _person.getUserNoticeBadgeValue)().then(function (res) {
         console.log(res);
         _this.badgeList = res.data.data;
       });
@@ -351,7 +377,7 @@ var _default = { name: 'person', data: function data() {return { //登录状态
     },
     //测试点击事件
     click: function click(name) {
-      this.$refs.uToast.success("\u70B9\u51FB\u4E86\u7B2C".concat(name, "\u4E2A"));
+      this.toMyPage(this.pageNameList[name].name);
     } },
 
   onReady: function onReady() {

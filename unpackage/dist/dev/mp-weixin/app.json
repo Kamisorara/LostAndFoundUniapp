@@ -8,7 +8,14 @@
     "pages/detail/login",
     "pages/detail/register",
     "pages/detail/createNotice/createLostPage",
-    "pages/detail/createNotice/createFoundPage"
+    "pages/detail/createNotice/createFoundPage",
+    "pages/detail/personDetail/myReleased",
+    "pages/detail/personDetail/myWaiting",
+    "pages/detail/personDetail/myHelped",
+    "pages/detail/personDetail/settingPage",
+    "pages/detail/personDetail/personalPage",
+    "pages/detail/searchPage",
+    "pages/detail/noticeDetail/noticeDetail"
   ],
   "subPackages": [],
   "window": {

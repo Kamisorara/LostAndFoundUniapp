@@ -67,6 +67,56 @@
 				"navigationBarTitleText": "创建拾物启示",
 				"navigationBarBackgroundColor": "#aaffff"
 			}
+		},
+		{
+			"path": "pages/detail/personDetail/myReleased",
+			"style": {
+				"navigationBarTitleText": "我发布的",
+				"navigationBarBackgroundColor": "#cbefff"
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/myWaiting",
+			"style": {
+				"navigationBarTitleText": "待处理",
+				"navigationBarBackgroundColor": "#e0e8ff"
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/myHelped",
+			"style": {
+				"navigationBarTitleText": "我帮助的",
+				"navigationBarBackgroundColor": "#d5ffef"
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/settingPage",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationBarBackgroundColor": "#fff7fc"
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/personalPage",
+			"style": {
+				"navigationBarTitleText": "个人空间",
+				"navigationBarBackgroundColor": "#eed9ff"
+			}
+		},
+		{
+			"path": "pages/detail/searchPage",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "搜索",
+				"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+			}
+		},
+		{
+			"path": "pages/detail/noticeDetail/noticeDetail",
+			"style": {
+				"navigationBarTitleText": "启示",
+				"navigationBarBackgroundColor": "#ffd5d5"
+			}
 		}
 	],
 	//全局配置

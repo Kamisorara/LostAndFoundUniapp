@@ -80,7 +80,7 @@ var components
 try {
   components = {
     uNoticeBar: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-notice-bar/u-notice-bar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-notice-bar/u-notice-bar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-notice-bar/u-notice-bar.vue */ 459))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-notice-bar/u-notice-bar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-notice-bar/u-notice-bar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-notice-bar/u-notice-bar.vue */ 475))
     },
     uDivider: function() {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-divider/u-divider */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-divider/u-divider")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-divider/u-divider.vue */ 282))
@@ -149,7 +149,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
 
 
 
@@ -364,6 +370,12 @@ var _index = __webpack_require__(/*! @/common/api/laf/index.js */ 145); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = { name: 'index_index', data: function data() {return { //顶部公告
       text1: '本网站仅作测试使用,如有bug请发送邮件至kamisola2020@163.com', //boardList公告列表
       boardList: [{ message: '本网站仅作测试', boardUrl: 'http://www.kamisora.xyz', urgency: 0 }], //排行列表
@@ -371,12 +383,14 @@ var _default = { name: 'index_index', data: function data() {return { //顶部�
       todayBest: { userName: 'Kamisora', avatar: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/12/e22baa33-df30-46d4-81bf-e6dcb44cb148.png' }, //紧急寻物列表
       urgencyLostList: [{ id: '1', userId: '1', lafPhotoUrl: 'https://img1.baidu.com/it/u=2476734823,214005944&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656694800&t=e2ffb2460abb3981af1b947b22c5b29c' }], //寻物列表
       lostList: [{ id: '1', userId: '1', lafPhotoUrl: 'https://img1.baidu.com/it/u=2476734823,214005944&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656694800&t=e2ffb2460abb3981af1b947b22c5b29c' }], //拾物列表
-      foundList: [{ id: '1', userId: '1', lafPhotoUrl: 'https://img1.baidu.com/it/u=2476734823,214005944&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656694800&t=e2ffb2460abb3981af1b947b22c5b29c' }] };}, methods: { //获取公告板
+      foundList: [{ id: '1', userId: '1', lafPhotoUrl: 'https://img1.baidu.com/it/u=2476734823,214005944&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656694800&t=e2ffb2460abb3981af1b947b22c5b29c' }] };}, methods: { //前往启示详情界面
+    toNoticeDetailPage: function toNoticeDetailPage(noticeId) {uni.navigateTo({ url: '/pages/detail/noticeDetail/noticeDetail' + '?id=' + noticeId });}, //获取公告板
     getBoardLists: function getBoardLists() {var _this = this;(0, _index.getBoardList)().then(function (res) {console.log(res);_this.boardList = res.data.data;});}, //获取排行榜
     getTop3UserLists: function getTop3UserLists() {var _this2 = this;(0, _index.getTop3UserList)().then(function (res) {console.log(res);_this2.rankList = res.data.data;});}, //获取紧急寻物启事列表
     getSimpleUrgencyLostLists: function getSimpleUrgencyLostLists() {var _this3 = this;(0, _index.getSimpleUrgencyLostList)().then(function (res) {console.log(res);_this3.urgencyLostList = res.data.data;});}, //获取寻物启事列表
     getSimpleLostList: function getSimpleLostList() {var _this4 = this;(0, _index.getSimpleLostInfo)().then(function (res) {console.log(res);_this4.lostList = res.data.data;});}, //获取拾物启示列表
     getSimpleFoundLists: function getSimpleFoundLists() {var _this5 = this;(0, _index.getSimpleFoundList)().then(function (res) {console.log(res);_this5.foundList = res.data.data;});} }, mounted: function mounted() {this.getSimpleFoundLists();this.getSimpleLostList();this.getSimpleUrgencyLostLists();this.getBoardLists();this.getTop3UserLists();} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

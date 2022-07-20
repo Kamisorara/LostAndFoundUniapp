@@ -11,16 +11,16 @@
   box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);"
 		>
 			<view class="person-main-head" style="height: 200rpx;display: flex;">
-				<view @click="toLoginPage()" class="avatar" style="margin-left: 70rpx;margin-top: 40rpx;"><u-avatar :src="userInfo.avatarUrl" size="50"></u-avatar></view>
+				<view @click="toPersonalPage()" class="avatar" style="margin-left: 70rpx;margin-top: 40rpx;"><u-avatar :src="userInfo.avatarUrl" size="50"></u-avatar></view>
 				<view class="name" style="margin-top: 50rpx;margin-left: 30rpx;;width: 450rpx;">
-					<text style="font-weight: 600">{{ userInfo.userName }}</text>
+					<text @click="toPersonalPage()" style="font-weight: 600">{{ userInfo.userName }}</text>
 					<view class="helped" style="font-size: 30rpx;color: #858585;">
 						<text>已帮助:</text>
 						<text style="font-size: 30rpx;color: darkgray;font-weight: 600;margin-left: 10rpx;">{{ userInfo.helpTimes }}</text>
 						<text style="margin-left: 10rpx;">人</text>
 					</view>
 				</view>
-				<view class="setting" style="margin-top: 10rpx;"><u-icon name="setting-fill" size="28"></u-icon></view>
+				<view @click="toSettingPage()" class="setting" style="margin-top: 10rpx;"><u-icon name="setting-fill" size="28"></u-icon></view>
 			</view>
 			<!-- 宫格布局 -->
 			<view style="margin-top: 60rpx;">
@@ -36,7 +36,6 @@
 						<text class="grid-text">{{ baseListItem.title }}</text>
 					</u-grid-item>
 				</u-grid>
-				<u-toast ref="uToast" />
 			</view>
 		</view>
 		<!-- 未登录显示 -->
@@ -105,10 +104,40 @@ export default {
 				}
 			],
 			//宫格徽标
-			badgeList: []
+			badgeList: [],
+			//跳转页面名称
+			pageNameList: [
+				{
+					name: 'myReleased'
+				},
+				{
+					name: 'myWaiting'
+				},
+				{
+					name: 'myHelped'
+				}
+			]
 		};
 	},
 	methods: {
+		//前往个人中心
+		toPersonalPage() {
+			uni.navigateTo({
+				url: '../detail/personDetail/personalPage'
+			});
+		},
+		//前往设置界面
+		toSettingPage() {
+			uni.navigateTo({
+				url: '../detail/personDetail/settingPage'
+			});
+		},
+		//前往宫格界面界面
+		toMyPage(pageName) {
+			uni.navigateTo({
+				url: '../detail/personDetail/' + pageName
+			});
+		},
 		//前往登录界面
 		toLoginPage() {
 			uni.navigateTo({
@@ -144,7 +173,7 @@ export default {
 		},
 		//测试点击事件
 		click(name) {
-			this.$refs.uToast.success(`点击了第${name}个`);
+			this.toMyPage(this.pageNameList[name].name);
 		}
 	},
 	onReady() {

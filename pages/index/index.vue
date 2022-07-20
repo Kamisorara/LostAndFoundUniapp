@@ -1,8 +1,8 @@
 <template>
 	<view class="index">
 		<view class="search" style="display: flex;height: 100rpx;background-color: #FFFFFF;">
-			<view class="avatar" style="margin-top: 15rpx;margin-left: 15rpx;"><u-avatar :src="userBasicInfo.avatarUrl" size="40"></u-avatar></view>
-			<view class="serach" style="width: 500rpx;margin-left: 30rpx;margin-top: 20rpx;">
+			<view @click="toPersonalPage()" class="avatar" style="margin-top: 15rpx;margin-left: 15rpx;"><u-avatar :src="userBasicInfo.avatarUrl" size="40"></u-avatar></view>
+			<view @click="toSearchPage()" class="serach" style="width: 500rpx;margin-left: 30rpx;margin-top: 20rpx;">
 				<u-search placeholder="搜索你要的" v-model="keyword" :show-action="false"></u-search>
 			</view>
 			<view class="addNew" style="margin-top: 16rpx;margin-left: 20rpx;"><u-button @click="show = true" shape="circle" icon="plus-circle"></u-button></view>
@@ -130,6 +130,18 @@ export default {
 		};
 	},
 	methods: {
+		//前往搜索界面
+		toSearchPage() {
+			uni.navigateTo({
+				url: '../detail/searchPage'
+			});
+		},
+		//前往个人界面
+		toPersonalPage() {
+			uni.navigateTo({
+				url: '../detail/personDetail/personalPage'
+			});
+		},
 		//切换首页和最近
 		changeCurrentChoise(item) {
 			this.currentChoise = item.index;
