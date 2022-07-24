@@ -11,3 +11,8 @@ export function getAllLostNotice(pageNum, pageSize) {
 export function createLostNotice(data) {
 	return request.post(urlHead + "/create-lost-notice", data);
 }
+
+// 根据启示id获取启示详情
+export function getLostNoticeDetail(id) {
+	return request.get(urlHead + '/get-foundpost-detail' + '?id=' + id);
+}

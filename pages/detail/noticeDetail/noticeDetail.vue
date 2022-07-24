@@ -12,11 +12,13 @@
 		<!-- 无图片并且是自己发布的 -->
 		<view class="none-photo" v-if="!noticePhotoList.length && noticeCreatedInfo.id === noticeVisitInfo.id">
 			<view style="margin-left: 50rpx;"><u--text type="info" size="20" text="请点击下方图标上传图片"></u--text></view>
-			<view style="margin-left: 50rpx;margin-top: 20rpx;">
-				<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple :maxCount="10"></u-upload>
-			</view>
-			<!-- 测试按钮 -->
-			<view><button @click="submitPhoto()">上传</button></view>
+			<view style="margin-left: 50rpx;margin-top: 20rpx;"><u-upload :fileList="fileList1" @afterRead="afterRead" name="1" multiple :maxCount="10"></u-upload></view>
+			<view v-if="ifBackToIndexPage"><button @click="backToIndexPage()">已有图片上传成功点击返回即可</button></view>
+			<u-divider text="分割线" :dot="true"></u-divider>
+		</view>
+		<!-- 无图并且不是自己发布的 -->
+		<view class="none-photo-notMine">
+			<u-empty text="该用户没有上传图片喔" icon="https://img0.baidu.com/it/u=590748739,1789824504&fm=253&fmt=auto&app=138&f=PNG?w=500&h=417"></u-empty>
 			<u-divider text="分割线" :dot="true"></u-divider>
 		</view>
 		<!-- 启示简介 -->
@@ -40,8 +42,8 @@
 				<u--text size="15" text="发起会话"></u--text>
 			</view>
 		</view>
-		<!-- 底部(未帮助) -->
-		<view class="helped-end" v-if="noticeDetail.done === '1'">
+		<!-- 底部(未帮助)并且是自己自己发布的 -->
+		<view class="helped-end" v-if="noticeDetail.done === '1' && noticeCreatedInfo.id === noticeVisitInfo.id">
 			<view style="width: 70%;"><u--text type="info" size="10" text="(如已完成请点击按钮)"></u--text></view>
 			<view style="width: 30%;background-color: red;height: 100%;">
 				<view @click="show = true" style="text-align:center;margin-top:20rpx;color: #FFFFFF;font-weight: 600;">未帮助</view>
@@ -51,7 +53,7 @@
 		<view>
 			<u-popup mode="center" round="20" :show="show" @close="close" @open="open"><view style="height: 650rpx;width: 700rpx;"></view></u-popup>
 		</view>
-		<!-- 底部(已帮助) -->
+		<!-- 底部(已帮助)大家都可以看到 -->
 		<view class="helped-end" v-if="noticeDetail.done === '0'">
 			<view style="width: 70%;display: flex;">
 				<view style="margin: 8rpx 0 0 20rpx;"><u--text type="info" text="帮助人:"></u--text></view>
@@ -64,10 +66,17 @@
 </template>
 
 <script>
+import { getNoticeFoundNoticeDetail } from '@/common/api/laf/found.js';
+import { getLostNoticeDetail } from '@/common/api/laf/lost.js';
+import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
+import { getToken } from '@/utils/token.js';
+import { getOtherUserBasicInfo } from '@/common/api/sys/userInfo.js';
 export default {
 	name: 'noticeDetailPage',
 	data() {
 		return {
+			//是否可以返回
+			ifBackToIndexPage: false,
 			//弹出层
 			show: false,
 			//上传图片列表
@@ -76,13 +85,12 @@ export default {
 			noticeCreatedInfo: {
 				id: '1231284718394712',
 				userName: 'Kamisora',
-				avatarUrl: '',
 				phoneNumber: '15906877873',
 				avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png'
 			},
 			//启示访问者信息
 			noticeVisitInfo: {
-				id: '1231284718394712',
+				id: '1231284718394711',
 				userName: ''
 			},
 			//启示信息
@@ -97,13 +105,8 @@ export default {
 			},
 			//图片展示
 			albumWidth: 0,
-			noticePhotoList: [
-				// 'https://img1.baidu.com/it/u=1220287642,842319143&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=adde4a935c0bd44ecb034b8178c633c6',
-				// 'https://img2.baidu.com/it/u=2463669505,2607971509&fm=253&app=138&size=w931&n=0&f=JPG&fmt=auto?sec=1658509200&t=6b1ad74c54a650d930ee62a9ae2dfa44',
-				// 'https://img2.baidu.com/it/u=3749748237,4013353562&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=a528c92efd3f208ddbfea4489b227a31',
-				// 'https://img0.baidu.com/it/u=157194238,17403950&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=6256a87886eafe4b00d07fa7f3d3175d',
-				// 'https://img1.baidu.com/it/u=890526170,3591067541&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=2f153c2a5d22ae62aa2ccfb7da51b1cd'
-			]
+			//图片列表
+			noticePhotoList: []
 		};
 	},
 	methods: {
@@ -124,8 +127,8 @@ export default {
 				});
 			});
 			for (let i = 0; i < lists.length; i++) {
-				console.log(this.fileList1);
 				const result = await this.uploadFilePromise(lists[i].url);
+				console.log(result);
 				let item = this[`fileList${event.name}`][fileListLen];
 				this[`fileList${event.name}`].splice(
 					fileListLen,
@@ -142,16 +145,21 @@ export default {
 		uploadFilePromise(url) {
 			return new Promise((resolve, reject) => {
 				let a = uni.uploadFile({
-					url: 'http://192.168.2.21:7001/upload', // 仅为示例，非真实的接口地址
+					url: 'http://192.168.31.174:8081/laf/person/uploadFile', // 仅为示例，非真实的接口地址
 					filePath: url,
 					name: 'file',
 					formData: {
-						user: 'test'
+						id: this.noticeDetail.id
+					},
+					header: {
+						token: getToken('token')
 					},
 					success: res => {
 						setTimeout(() => {
+							console.log(res);
+							this.ifBackToIndexPage = true;
 							resolve(res.data.data);
-						}, 1000);
+						}, 200);
 					}
 				});
 			});
@@ -163,11 +171,43 @@ export default {
 		close() {
 			this.show = false;
 			// console.log('close');
+		},
+		//返回index界面
+		backToIndexPage() {
+			uni.switchTab({
+				url: '../../index/index'
+			});
+		},
+		//验证用户登录状态并且获取当前访问者的基本信息包括id,userName,avatarUrl
+		getVisitUserInfo() {
+			virifyLoginStatus().then(res => {
+				console.log(res);
+				this.noticeVisitInfo = res.data.data;
+			});
+		},
+		//根据启示id 获取当前启示的基本信息
+		getNoticeInfo() {
+			getNoticeFoundNoticeDetail(this.noticeDetail.id).then(res => {
+				console.log(res);
+				this.noticeDetail = res.data.data;
+				this.getNoticeCreatedUserBasicInfo();
+			});
+		},
+		//获取启示创建者的基本信息
+		getNoticeCreatedUserBasicInfo() {
+			getOtherUserBasicInfo(this.noticeDetail.createdUserId).then(res => {
+				console.log(res);
+				this.noticeCreatedInfo = res.data.data;
+			});
 		}
 	},
 	//获取url参数
 	onLoad(data) {
 		this.noticeDetail.id = data.id;
+	},
+	onReady() {
+		this.getNoticeInfo();
+		this.getVisitUserInfo();
 	}
 };
 </script>

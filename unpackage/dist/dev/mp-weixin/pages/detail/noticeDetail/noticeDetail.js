@@ -109,6 +109,9 @@ try {
     uUpload: function() {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-upload/u-upload.vue */ 480))
     },
+    uEmpty: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-empty/u-empty.vue */ 490))
+    },
     uAvatar: function() {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 256))
     },
@@ -178,91 +181,99 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 34));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _found = __webpack_require__(/*! @/common/api/laf/found.js */ 162);
+var _lost = __webpack_require__(/*! @/common/api/laf/lost.js */ 171);
+var _userInfo = __webpack_require__(/*! @/common/api/sys/userInfo.js */ 143);
+var _token = __webpack_require__(/*! @/utils/token.js */ 144);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
 {
   name: 'noticeDetailPage',
   data: function data() {
     return {
+      //是否可以返回
+      ifBackToIndexPage: false,
       //弹出层
       show: false,
       //上传图片列表
       fileList1: [],
       //启示发布者信息
-      noticeCreatedInfo: _defineProperty({
+      noticeCreatedInfo: {
         id: '1231284718394712',
         userName: 'Kamisora',
-        avatarUrl: '',
-        phoneNumber: '15906877873' }, "avatarUrl",
-      'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png'),
+        phoneNumber: '15906877873',
+        avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png' },
 
       //启示访问者信息
       noticeVisitInfo: {
-        id: '1231284718394712',
+        id: '1231284718394711',
         userName: '' },
 
       //启示信息
@@ -277,13 +288,8 @@ var _default =
 
       //图片展示
       albumWidth: 0,
-      noticePhotoList: [
-        // 'https://img1.baidu.com/it/u=1220287642,842319143&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=adde4a935c0bd44ecb034b8178c633c6',
-        // 'https://img2.baidu.com/it/u=2463669505,2607971509&fm=253&app=138&size=w931&n=0&f=JPG&fmt=auto?sec=1658509200&t=6b1ad74c54a650d930ee62a9ae2dfa44',
-        // 'https://img2.baidu.com/it/u=3749748237,4013353562&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=a528c92efd3f208ddbfea4489b227a31',
-        // 'https://img0.baidu.com/it/u=157194238,17403950&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=6256a87886eafe4b00d07fa7f3d3175d',
-        // 'https://img1.baidu.com/it/u=890526170,3591067541&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658509200&t=2f153c2a5d22ae62aa2ccfb7da51b1cd'
-      ] };
+      //图片列表
+      noticePhotoList: [] };
 
   },
   methods: {
@@ -303,9 +309,9 @@ var _default =
                     message: '上传中' }));
 
                 });
-                i = 0;case 4:if (!(i < lists.length)) {_context.next = 15;break;}
-                console.log(_this.fileList1);_context.next = 8;return (
-                  _this.uploadFilePromise(lists[i].url));case 8:result = _context.sent;
+                i = 0;case 4:if (!(i < lists.length)) {_context.next = 15;break;}_context.next = 7;return (
+                  _this.uploadFilePromise(lists[i].url));case 7:result = _context.sent;
+                console.log(result);
                 item = _this["fileList".concat(event.name)][fileListLen];
                 _this["fileList".concat(event.name)].splice(
                 fileListLen,
@@ -319,19 +325,24 @@ var _default =
                 fileListLen++;case 12:i++;_context.next = 4;break;case 15:case "end":return _context.stop();}}}, _callee);}))();
 
     },
-    uploadFilePromise: function uploadFilePromise(url) {
+    uploadFilePromise: function uploadFilePromise(url) {var _this2 = this;
       return new Promise(function (resolve, reject) {
         var a = uni.uploadFile({
-          url: 'http://192.168.2.21:7001/upload', // 仅为示例，非真实的接口地址
+          url: 'http://192.168.31.174:8081/laf/person/uploadFile', // 仅为示例，非真实的接口地址
           filePath: url,
           name: 'file',
           formData: {
-            user: 'test' },
+            id: _this2.noticeDetail.id },
+
+          header: {
+            token: (0, _token.getToken)('token') },
 
           success: function success(res) {
             setTimeout(function () {
+              console.log(res);
+              _this2.ifBackToIndexPage = true;
               resolve(res.data.data);
-            }, 1000);
+            }, 200);
           } });
 
       });
@@ -343,11 +354,43 @@ var _default =
     close: function close() {
       this.show = false;
       // console.log('close');
+    },
+    //返回index界面
+    backToIndexPage: function backToIndexPage() {
+      uni.switchTab({
+        url: '../../index/index' });
+
+    },
+    //验证用户登录状态并且获取当前访问者的基本信息包括id,userName,avatarUrl
+    getVisitUserInfo: function getVisitUserInfo() {var _this3 = this;
+      (0, _userInfo.virifyLoginStatus)().then(function (res) {
+        console.log(res);
+        _this3.noticeVisitInfo = res.data.data;
+      });
+    },
+    //根据启示id 获取当前启示的基本信息
+    getNoticeInfo: function getNoticeInfo() {var _this4 = this;
+      (0, _found.getNoticeFoundNoticeDetail)(this.noticeDetail.id).then(function (res) {
+        console.log(res);
+        _this4.noticeDetail = res.data.data;
+        _this4.getNoticeCreatedUserBasicInfo();
+      });
+    },
+    //获取启示创建者的基本信息
+    getNoticeCreatedUserBasicInfo: function getNoticeCreatedUserBasicInfo() {var _this5 = this;
+      (0, _userInfo.getOtherUserBasicInfo)(this.noticeDetail.createdUserId).then(function (res) {
+        console.log(res);
+        _this5.noticeCreatedInfo = res.data.data;
+      });
     } },
 
   //获取url参数
   onLoad: function onLoad(data) {
     this.noticeDetail.id = data.id;
+  },
+  onReady: function onReady() {
+    this.getNoticeInfo();
+    this.getVisitUserInfo();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

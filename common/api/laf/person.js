@@ -11,3 +11,5 @@ export function getUserDetailInfo() {
 export function getUserNoticeBadgeValue() {
 	return request.get(urlHead + "/get-userNotice-badge");
 }
+
+

@@ -13,3 +13,8 @@ export function getAllFoundList(pageNum, pageSize) {
 export function createFoundNotice(data) {
 	return request.post(urlHead + "/create-found-notice", data);
 }
+
+// 根据启示id获取启示详情
+export function getNoticeFoundNoticeDetail(id) {
+	return request.get(urlHead + '/get-foundpost-detail' + '?id=' + id);
+}

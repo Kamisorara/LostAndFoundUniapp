@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _props = _interopRequireDefault(__webpack_require__(/*! ../u-text/props.js */ 396));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uvText = function uvText() {Promise.all(/*! require.ensure | uni_modules/uview-ui/components/u-text/u-text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-text/u-text")]).then((function () {return resolve(__webpack_require__(/*! ../u-text/u-text.vue */ 555));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _props = _interopRequireDefault(__webpack_require__(/*! ../u-text/props.js */ 396));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uvText = function uvText() {Promise.all(/*! require.ensure | uni_modules/uview-ui/components/u-text/u-text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-text/u-text")]).then((function () {return resolve(__webpack_require__(/*! ../u-text/u-text.vue */ 563));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   name: "u--text",
   mixins: [uni.$u.mpMixin, _props.default, uni.$u.mixin],
