@@ -17,7 +17,7 @@
 			<u-divider text="分割线" :dot="true"></u-divider>
 		</view>
 		<!-- 无图并且不是自己发布的 -->
-		<view class="none-photo-notMine">
+		<view class="none-photo-notMine" v-if="noticeCreatedInfo.id != noticeVisitInfo.id && !noticePhotoList.length">
 			<u-empty text="该用户没有上传图片喔" icon="https://img0.baidu.com/it/u=590748739,1789824504&fm=253&fmt=auto&app=138&f=PNG?w=500&h=417"></u-empty>
 			<u-divider text="分割线" :dot="true"></u-divider>
 		</view>
@@ -145,7 +145,7 @@ export default {
 		uploadFilePromise(url) {
 			return new Promise((resolve, reject) => {
 				let a = uni.uploadFile({
-					url: 'http://192.168.31.174:8081/laf/person/uploadFile', // 仅为示例，非真实的接口地址
+					url: 'http://192.168.31.174:8081/laf/person/fastdfs-upload', // 仅为示例，非真实的接口地址
 					filePath: url,
 					name: 'file',
 					formData: {
@@ -189,13 +189,16 @@ export default {
 		getNoticeInfo() {
 			getNoticeFoundNoticeDetail(this.noticeDetail.id).then(res => {
 				console.log(res);
-				this.noticeDetail = res.data.data;
-				this.getNoticeCreatedUserBasicInfo();
+				this.noticeDetail = res.data.data[0];
+				this.noticePhotoList = res.data.data[1];
+				if (res.data.code === 200) {
+					this.getNoticeCreatedUserBasicInfo();
+				}
 			});
 		},
 		//获取启示创建者的基本信息
 		getNoticeCreatedUserBasicInfo() {
-			getOtherUserBasicInfo(this.noticeDetail.createdUserId).then(res => {
+			getOtherUserBasicInfo(this.noticeDetail.userId).then(res => {
 				console.log(res);
 				this.noticeCreatedInfo = res.data.data;
 			});

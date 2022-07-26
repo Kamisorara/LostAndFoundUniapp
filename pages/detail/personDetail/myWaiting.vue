@@ -12,4 +12,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+page {
+	background-color: #f4f4f4;
+	height: 100%;
+}
+</style>
