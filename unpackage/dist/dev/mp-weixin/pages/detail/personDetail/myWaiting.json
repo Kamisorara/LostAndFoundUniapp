@@ -1,5 +1,8 @@
 {
   "navigationBarTitleText": "待处理",
   "navigationBarBackgroundColor": "#e0e8ff",
-  "usingComponents": {}
+  "usingComponents": {
+    "u-subsection": "/uni_modules/uview-ui/components/u-subsection/u-subsection",
+    "u-modal": "/uni_modules/uview-ui/components/u-modal/u-modal"
+  }
 }
