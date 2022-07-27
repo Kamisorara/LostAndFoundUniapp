@@ -12,6 +12,7 @@ export function getUserNoticeBadgeValue() {
 	return request.get(urlHead + "/get-userNotice-badge");
 }
 
-
-
-
+//获取用户待处理列表(从token中获取)
+export function getUserWaitingNoticeLists() {
+	return request.get(urlHead + '/user-waiting');
+}

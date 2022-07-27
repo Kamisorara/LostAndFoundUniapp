@@ -18,7 +18,11 @@
 					<view @click="show = true" class="cancel" style="height: 40rpx;width: 160rpx;border-radius: 30rpx;border: 1px dashed #3d3d3d;display: flex;">
 						<text style="color:#6d6d6d;font-size: 30rpx;margin: auto;">取消处理</text>
 					</view>
-					<view class="cancel" style="height: 40rpx;width: 160rpx;border-radius: 30rpx;border: 1px dashed #ff4231;display: flex;margin-left: 40rpx;">
+					<view
+						@click="toNoticeDetailPage(item.id)"
+						class="cancel"
+						style="height: 40rpx;width: 160rpx;border-radius: 30rpx;border: 1px dashed #ff4231;display: flex;margin-left: 40rpx;"
+					>
 						<text style="color:#fc4929;font-size: 30rpx;margin: auto;">立即处理</text>
 					</view>
 				</view>
@@ -30,6 +34,7 @@
 </template>
 
 <script>
+import { getUserWaitingNoticeLists } from '@/common/api/laf/person.js';
 export default {
 	name: 'myWaiting',
 	data() {
@@ -63,7 +68,23 @@ export default {
 		},
 		confirm() {
 			this.show = false;
+		},
+		//前往启示界面
+		toNoticeDetailPage(noticeId) {
+			uni.navigateTo({
+				url: '../noticeDetail/noticeDetail' + '?id=' + noticeId
+			});
+		},
+		//获取用户待处理列表
+		getUserWaitingNoticeList() {
+			getUserWaitingNoticeLists().then(res => {
+				console.log(res);
+				this.noticeWaitingLists = res.data.data;
+			});
 		}
+	},
+	onReady() {
+		this.getUserWaitingNoticeList();
 	}
 };
 </script>

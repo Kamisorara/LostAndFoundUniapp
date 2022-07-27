@@ -3,7 +3,7 @@
 		<!-- 有照片 -->
 		<view class="u-demo-block" v-if="noticePhotoList.length">
 			<view class="u-demo-block__content">
-				<view class="album" style="margin-top: 30rpx;">
+				<view class="album" style="margin-top: 30rpx">
 					<view class="album__content"><u-album multipleSize="230rpx" :urls="noticePhotoList"></u-album></view>
 				</view>
 			</view>
@@ -11,8 +11,8 @@
 		</view>
 		<!-- 无图片并且是自己发布的 -->
 		<view class="none-photo" v-if="!noticePhotoList.length && noticeCreatedInfo.id === noticeVisitInfo.id">
-			<view style="margin-left: 50rpx;"><u--text type="info" size="20" text="请点击下方图标上传图片"></u--text></view>
-			<view style="margin-left: 50rpx;margin-top: 20rpx;"><u-upload :fileList="fileList1" @afterRead="afterRead" name="1" multiple :maxCount="10"></u-upload></view>
+			<view style="margin-left: 50rpx"><u--text type="info" size="20" text="请点击下方图标上传图片"></u--text></view>
+			<view style="margin-left: 50rpx; margin-top: 20rpx"><u-upload :fileList="fileList1" @afterRead="afterRead" name="1" multiple :maxCount="10"></u-upload></view>
 			<view v-if="ifBackToIndexPage"><button @click="backToIndexPage()">已有图片上传成功点击返回即可</button></view>
 			<u-divider text="分割线" :dot="true"></u-divider>
 		</view>
@@ -23,9 +23,9 @@
 		</view>
 		<!-- 启示简介 -->
 		<view class="notice-message">
-			<view class="message" style="margin-left: 20rpx;height: 160rpx;"><u--text text="丢失一个airpods pro 有没有人看到"></u--text></view>
-			<view class="notice-message-buttom" style="height: 40rpx;">
-				<view style="margin-left: 540rpx;display: flex;">
+			<view class="message" style="margin-left: 20rpx; height: 160rpx"><u--text :text="noticeDetail.message"></u--text></view>
+			<view class="notice-message-buttom" style="height: 40rpx">
+				<view style="margin-left: 540rpx; display: flex">
 					<u--text type="info" text="浏览:"></u--text>
 					<u--text type="info" bold :text="noticeDetail.view"></u--text>
 				</view>
@@ -33,34 +33,63 @@
 		</view>
 		<!-- 启示用户信息 -->
 		<view class="userInfoMessage">
-			<view style="display: flex;">
-				<view style="margin: 30rpx 0 0 20rpx;"><u-avatar :src="noticeCreatedInfo.avatarUrl" size="45"></u-avatar></view>
-				<view style="margin: 30rpx 0 0 20rpx;"><u--text size="20" bold :text="noticeCreatedInfo.userName"></u--text></view>
+			<view style="display: flex">
+				<view style="margin: 30rpx 0 0 20rpx"><u-avatar :src="noticeCreatedInfo.avatarUrl" size="45"></u-avatar></view>
+				<view style="margin: 30rpx 0 0 20rpx"><u--text size="20" bold :text="noticeCreatedInfo.userName"></u--text></view>
 			</view>
-			<view style="display: flex;width: 180rpx;background-color: #dddddd;border-radius: 30rpx;margin: 50rpx 0 0 120rpx;">
+			<view
+				style="
+          display: flex;
+          width: 180rpx;
+          background-color: #dddddd;
+          border-radius: 30rpx;
+          margin: 50rpx 0 0 120rpx;
+        "
+			>
 				<u-icon size="25" name="chat"></u-icon>
 				<u--text size="15" text="发起会话"></u--text>
 			</view>
 		</view>
 		<!-- 底部(未帮助)并且是自己自己发布的 -->
 		<view class="helped-end" v-if="noticeDetail.done === '1' && noticeCreatedInfo.id === noticeVisitInfo.id">
-			<view style="width: 70%;"><u--text type="info" size="10" text="(如已完成请点击按钮)"></u--text></view>
-			<view style="width: 30%;background-color: red;height: 100%;">
-				<view @click="show = true" style="text-align:center;margin-top:20rpx;color: #FFFFFF;font-weight: 600;">未帮助</view>
+			<view style="width: 70%"><u--text type="info" size="10" text="(如已完成请点击按钮)"></u--text></view>
+			<view style="width: 30%; background-color: red; height: 100%">
+				<view
+					@click="show = true"
+					style="
+            text-align: center;
+            margin-top: 20rpx;
+            color: #ffffff;
+            font-weight: 600;
+          "
+				>
+					未帮助
+				</view>
 			</view>
 		</view>
 		<!-- 弹出层 -->
 		<view>
-			<u-popup mode="center" round="20" :show="show" @close="close" @open="open"><view style="height: 650rpx;width: 700rpx;"></view></u-popup>
+			<u-popup mode="center" round="20" :show="show" @close="close" @open="open"><view style="height: 650rpx; width: 700rpx"></view></u-popup>
 		</view>
 		<!-- 底部(已帮助)大家都可以看到 -->
 		<view class="helped-end" v-if="noticeDetail.done === '0'">
-			<view style="width: 70%;display: flex;">
-				<view style="margin: 8rpx 0 0 20rpx;"><u--text type="info" text="帮助人:"></u--text></view>
-				<view style="margin-left: 20rpx;"><u-avatar :src="noticeCreatedInfo.avatarUrl" size="30"></u-avatar></view>
-				<view style="margin: 8rpx 0 0 10rpx;"><u--text bold :text="noticeCreatedInfo.userName"></u--text></view>
+			<view style="width: 70%; display: flex">
+				<view style="margin: 8rpx 0 0 20rpx"><u--text type="info" text="帮助人:"></u--text></view>
+				<view style="margin-left: 20rpx"><u-avatar :src="noticeCreatedInfo.avatarUrl" size="30"></u-avatar></view>
+				<view style="margin: 8rpx 0 0 10rpx"><u--text bold :text="noticeCreatedInfo.userName"></u--text></view>
 			</view>
-			<view style="background-color: #cecece;width: 30%;height: 100%;"><view style="text-align:center;margin-top:20rpx;color: #a0a0a0;font-weight: 600;">已帮助</view></view>
+			<view style="background-color: #cecece; width: 30%; height: 100%">
+				<view
+					style="
+            text-align: center;
+            margin-top: 20rpx;
+            color: #a0a0a0;
+            font-weight: 600;
+          "
+				>
+					已帮助
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -83,25 +112,26 @@ export default {
 			fileList1: [],
 			//启示发布者信息
 			noticeCreatedInfo: {
-				id: '1231284718394712',
-				userName: 'Kamisora',
-				phoneNumber: '15906877873',
-				avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png'
+				id: '',
+				userName: '',
+				phoneNumber: '',
+				avatarUrl: ''
 			},
 			//启示访问者信息
 			noticeVisitInfo: {
-				id: '1231284718394711',
+				id: '',
 				userName: ''
 			},
 			//启示信息
 			noticeDetail: {
 				id: '',
 				createdUserId: '',
+				message: '',
 				type: '', //启示类型0(寻物),1(拾物)
 				urgency: '',
 				done: '1',
-				helpedId: '123123123123123',
-				view: 0
+				helpedId: '',
+				view: '0'
 			},
 			//图片展示
 			albumWidth: 0,

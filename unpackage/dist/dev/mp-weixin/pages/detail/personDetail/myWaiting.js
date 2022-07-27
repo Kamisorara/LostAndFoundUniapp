@@ -101,7 +101,7 @@ try {
       return Promise.all(/*! import() | uni_modules/uview-ui/components/u-subsection/u-subsection */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-subsection/u-subsection")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-subsection/u-subsection.vue */ 466))
     },
     uModal: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-modal/u-modal */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-modal/u-modal")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-modal/u-modal.vue */ 680))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-modal/u-modal */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-modal/u-modal")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-modal/u-modal.vue */ 474))
     }
   }
 } catch (e) {
@@ -163,72 +163,95 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  name: 'myWaiting',
-  data: function data() {
-    return {
-      //弹出确认框
-      show: false,
-      title: '请确认喔',
-      content: '你确定要删除此条内容嘛 ≖‿≖',
-      list: ['待上传', '待完成'],
-      curNow: 0,
-      noticeWaitingLists: [
-      {
-        id: '8',
-        userId: '1540533503228669954',
-        message: '寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你',
-        userName: 'Kamisora',
-        type: '0',
-        avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png' }] };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
-  },
-  methods: {
-    //切换
-    sectionChange: function sectionChange(index) {
-      this.curNow = index;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _person = __webpack_require__(/*! @/common/api/laf/person.js */ 180); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: 'myWaiting', data: function data() {return { //弹出确认框
+      show: false, title: '请确认喔', content: '你确定要删除此条内容嘛 ≖‿≖', list: ['待上传', '待完成'], curNow: 0, noticeWaitingLists: [{ id: '8', userId: '1540533503228669954', message: '寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你', userName: 'Kamisora', type: '0', avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png' }] };}, methods: { //切换
+    sectionChange: function sectionChange(index) {this.curNow = index;}, //弹出确认框
+    close: function close() {this.show = false;}, confirm: function confirm() {this.show = false;}, //前往启示界面
+    toNoticeDetailPage: function toNoticeDetailPage(noticeId) {uni.navigateTo({ url: '../noticeDetail/noticeDetail' + '?id=' + noticeId });
     },
-    //弹出确认框
-    close: function close() {
-      this.show = false;
-    },
-    confirm: function confirm() {
-      this.show = false;
-    } } };exports.default = _default;
+    //获取用户待处理列表
+    getUserWaitingNoticeList: function getUserWaitingNoticeList() {var _this = this;
+      (0, _person.getUserWaitingNoticeLists)().then(function (res) {
+        console.log(res);
+        _this.noticeWaitingLists = res.data.data;
+      });
+    } },
+
+  onReady: function onReady() {
+    this.getUserWaitingNoticeList();
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
