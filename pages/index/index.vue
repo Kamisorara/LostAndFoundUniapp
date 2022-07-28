@@ -24,7 +24,7 @@
 			</view>
 		</u-sticky>
 		<!-- 组件部分 -->
-		<index_index v-if="currentChoise === 0"></index_index>
+		<index_index :userIsLogin="userIsLogin" v-if="currentChoise === 0"></index_index>
 		<!-- <index_recent v-if="currentChoise === 1"></index_recent> -->
 		<view v-if="currentChoise === 1" class="index_recent">
 			<!-- 用户发布 -->
@@ -78,6 +78,8 @@ import { getBoardList, getRecentNotice } from '@/common/api/laf/index.js';
 export default {
 	data() {
 		return {
+			//用户是否登录
+			userIsLogin: false,
 			//返回顶部
 			scrollTop: 0,
 			//当前选择（主页或最近，0主页，1最近）
@@ -138,9 +140,11 @@ export default {
 		},
 		//前往个人界面
 		toPersonalPage() {
-			uni.navigateTo({
-				url: '../detail/personDetail/personalPage'
-			});
+			if (this.userIsLogin === true) {
+				uni.navigateTo({
+					url: '../detail/personDetail/personalPage'
+				});
+			}
 		},
 		//切换首页和最近
 		changeCurrentChoise(item) {
@@ -159,9 +163,10 @@ export default {
 					console.log(res);
 					if (res.data.code === 200) {
 						this.userBasicInfo = res.data.data;
+						this.userIsLogin = true;
 					} else if (res.data.code === 401) {
 						removeToken('token');
-						this.toLoginPage();
+						this.userIsLogin = false;
 					}
 				})
 				.catch(err => {
@@ -187,14 +192,18 @@ export default {
 		},
 		//前往创建界面
 		toCreateLostPage() {
-			uni.navigateTo({
-				url: '../detail/createNotice/createLostPage'
-			});
+			if (this.userIsLogin === true) {
+				uni.navigateTo({
+					url: '../detail/createNotice/createLostPage'
+				});
+			}
 		},
 		toCreateFoundPage() {
-			uni.navigateTo({
-				url: '../detail/createNotice/createFoundPage'
-			});
+			if (this.userIsLogin === true) {
+				uni.navigateTo({
+					url: '../detail/createNotice/createFoundPage'
+				});
+			}
 		},
 		//前往登录界面
 		toLoginPage() {
@@ -226,6 +235,16 @@ export default {
 	onReady() {
 		this.virifyLogin();
 		this.getRecentNoticeLists();
+	},
+	onShow() {
+		this.virifyLogin();
+	},
+	//下拉刷新
+	onPullDownRefresh() {
+		this.getRecentNoticeLists();
+		setTimeout(() => {
+			uni.stopPullDownRefresh();
+		}, 1000);
 	}
 };
 </script>
@@ -233,7 +252,6 @@ export default {
 <style lang="scss" scoped>
 page {
 	background-color: #f4f4f4;
-	height: 100%;
 }
 .wrap {
 	height: 200vh;

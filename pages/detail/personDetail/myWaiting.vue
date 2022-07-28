@@ -45,16 +45,7 @@ export default {
 			content: '你确定要删除此条内容嘛 ≖‿≖',
 			list: ['待上传', '待完成'],
 			curNow: 0,
-			noticeWaitingLists: [
-				{
-					id: '8',
-					userId: '1540533503228669954',
-					message: '寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你寻找你',
-					userName: 'Kamisora',
-					type: '0',
-					avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png'
-				}
-			]
+			noticeWaitingLists: []
 		};
 	},
 	methods: {

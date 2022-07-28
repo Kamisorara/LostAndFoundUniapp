@@ -178,6 +178,9 @@ export default {
 	},
 	onReady() {
 		this.getUserDetailInfoByToken();
+	},
+	onShow() {
+		this.getUserDetailInfoByToken();
 	}
 };
 </script>

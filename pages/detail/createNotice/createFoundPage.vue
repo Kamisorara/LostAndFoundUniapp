@@ -47,6 +47,15 @@ export default {
 		createNewFoundNotice() {
 			createFoundNotice(this.model1.noticeInfo).then(res => {
 				console.log(res);
+				if (res.data.code === 200) {
+					this.toNoticeDetailPage();
+				}
+			});
+		},
+		//跳转至待处理界面
+		toNoticeDetailPage() {
+			uni.switchTab({
+				url: '../../person/person'
 			});
 		}
 	},

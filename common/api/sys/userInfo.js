@@ -10,3 +10,8 @@ export function virifyLoginStatus() {
 export function getOtherUserBasicInfo(userId) {
 	return request.get(urlHead + '/get-user-info' + '?id=' + userId);
 }
+
+//根据用户名搜索用户 
+export function getUserByUserName(userName) {
+	return request.post(urlHead + '/search-user' + '?userName=' + userName);
+}

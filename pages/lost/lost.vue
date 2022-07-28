@@ -99,6 +99,14 @@ export default {
 	},
 	onReady() {
 		this.getAllLostNoticeLists();
+	},
+	onPullDownRefresh() {
+		uni.redirectTo({
+			url: 'lost'
+		});
+		setTimeout(() => {
+			uni.stopPullDownRefresh();
+		}, 1000);
 	}
 };
 </script>

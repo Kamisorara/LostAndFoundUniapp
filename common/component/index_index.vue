@@ -116,6 +116,9 @@ import { setToken, removeToken } from '@/utils/token.js';
 import { getBoardList, getTop3UserList, getSimpleLostInfo, getSimpleFoundList, getSimpleUrgencyLostList } from '@/common/api/laf/index.js';
 export default {
 	name: 'index_index',
+	props: {
+		userIsLogin: false
+	},
 	data() {
 		return {
 			//顶部公告
@@ -169,9 +172,11 @@ export default {
 	methods: {
 		//前往启示详情界面
 		toNoticeDetailPage(noticeId) {
-			uni.navigateTo({
-				url: '/pages/detail/noticeDetail/noticeDetail' + '?id=' + noticeId
-			});
+			if (this.userIsLogin === true) {
+				uni.navigateTo({
+					url: '/pages/detail/noticeDetail/noticeDetail' + '?id=' + noticeId
+				});
+			}
 		},
 		//获取公告板
 		getBoardLists() {

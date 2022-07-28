@@ -30,22 +30,41 @@
 				<u-radio-group :disabled="true" v-model="rememberMe"><u-radio shape="circle" label="记住我"></u-radio></u-radio-group>
 			</view>
 			<view class="login" style="margin-top: 80rpx;width: 100px;margin-left: 100rpx;">
-				<u-button v-show="!isClick" @click="loginMethod()" text="登录" color="linear-gradient(to right, rgb(170, 255, 255), rgb(213, 132, 207))"></u-button>
+				<u-button v-show="!isClick" @click="codeVerifyshow = true" text="登录" color="linear-gradient(to right, rgb(170, 255, 255), rgb(213, 132, 207))"></u-button>
 				<u-button v-show="isClick" loading loadingText="加载中" color="linear-gradient(to right, rgb(170, 255, 255), rgb(213, 132, 207))"></u-button>
 			</view>
 		</view>
+		<!-- 验证码弹窗 -->
+		<u-modal :show="codeVerifyshow" @confirm="loginMethod()" :title="title">
+			<view>
+				<view style="display: flex;">
+					<view style="margin: auto;" class="code_img" @click="getLoginverifyCodeImg()">
+						<u--image :showLoading="true" :src="LoginCodeVerifyCodeForm.img" mode="widthFix" width="200rpx" height="50px"></u--image>
+					</view>
+				</view>
+				<view style="width: 60%;margin: auto;" class="user_code_input"><u--input placeholder="输入验证码" border="surround" v-model="userInfo.verifyCode"></u--input></view>
+			</view>
+		</u-modal>
 		<!-- toast弹窗 -->
 		<view><u-toast ref="uToast"></u-toast></view>
 	</view>
 </template>
 
 <script>
-import { login } from '@/common/api/sys/userCommon.js';
+import { login, getLoginverifyCode } from '@/common/api/sys/userCommon.js';
 import { setToken, removeToken } from '@/utils/token.js';
 export default {
 	name: 'login',
 	data() {
 		return {
+			//验证码验证表单
+			LoginCodeVerifyCodeForm: {
+				uuid: '',
+				img: 'https://img1.baidu.com/it/u=358105290,730157327&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656781200&t=7849921314e7abf94a336061c0f659c8'
+			},
+			//验证码弹窗
+			codeVerifyshow: false,
+			title: '请输入验证码',
 			//是否按下按钮
 			isClick: false,
 			//记住我
@@ -53,7 +72,9 @@ export default {
 			//用户登录信息
 			userInfo: {
 				username: '',
-				password: ''
+				password: '',
+				uuid: '',
+				verifyCode: ''
 			},
 			show: false
 		};
@@ -61,15 +82,16 @@ export default {
 	methods: {
 		//登录api调用
 		loginMethod() {
+			this.codeVerifyshow = false;
 			removeToken('token');
 			login(this.userInfo)
 				.then(res => {
 					console.log(res);
 					this.isClick = true;
-					//存储token
-					setToken('token', res.data.data.token);
-					this.showSuccessToast();
 					if (res.data.code === 200) {
+						//存储token
+						setToken('token', res.data.data.token);
+						this.showSuccessToast();
 						//登录成功后跳转
 						setTimeout(() => {
 							uni.reLaunch({
@@ -77,11 +99,16 @@ export default {
 							});
 						}, 1500);
 					} else if (res.data.code === 401) {
-						this.showFileToast();
+						this.showFileToast(res.data.msg);
+						this.isClick = false;
+					} else if (res.data.code === 400) {
+						this.showFileToast(res.data.msg);
+						this.isClick = false;
 					}
 				})
 				.catch(err => {
-					this.showFileToast();
+					Error(err);
+					this.showFileToast('发生未知错误,登录失败!');
 				});
 		},
 		//登录成功提示
@@ -93,13 +120,24 @@ export default {
 			});
 		},
 		//登录失败提示
-		showFileToast() {
+		showFileToast(data) {
 			this.$refs.uToast.show({
 				title: '登录失败',
 				type: 'error',
-				message: '账号或密码输入错误，请重试!'
+				message: data
+			});
+		},
+		//获取登录验证码
+		getLoginverifyCodeImg() {
+			getLoginverifyCode().then(res => {
+				console.log(res);
+				this.LoginCodeVerifyCodeForm = res.data;
+				this.userInfo.uuid = res.data.uuid;
 			});
 		}
+	},
+	onReady() {
+		this.getLoginverifyCodeImg();
 	}
 };
 </script>

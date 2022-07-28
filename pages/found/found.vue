@@ -98,6 +98,14 @@ export default {
 	},
 	onReady() {
 		this.getAllFoundLists();
+	},
+	onPullDownRefresh() {
+		uni.redirectTo({
+			url: 'found'
+		});
+		setTimeout(() => {
+			uni.stopPullDownRefresh();
+		}, 1000);
 	}
 };
 </script>

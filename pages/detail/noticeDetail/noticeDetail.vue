@@ -23,7 +23,11 @@
 		</view>
 		<!-- 启示简介 -->
 		<view class="notice-message">
-			<view class="message" style="margin-left: 20rpx; height: 160rpx"><u--text :text="noticeDetail.message"></u--text></view>
+			<view class="message" style="margin-left: 20rpx; height: 160rpx">
+				<view class="noticeDetail_message" style="font-size: 30rpx;color: #535353;display: flex;">
+					<text style="margin: 10rpx 10rpx 0 10rpx;">{{ noticeDetail.message }}</text>
+				</view>
+			</view>
 			<view class="notice-message-buttom" style="height: 40rpx">
 				<view style="margin-left: 540rpx; display: flex">
 					<u--text type="info" text="浏览:"></u--text>
@@ -51,8 +55,8 @@
 			</view>
 		</view>
 		<!-- 底部(未帮助)并且是自己自己发布的 -->
-		<view class="helped-end" v-if="noticeDetail.done === '1' && noticeCreatedInfo.id === noticeVisitInfo.id">
-			<view style="width: 70%"><u--text type="info" size="10" text="(如已完成请点击按钮)"></u--text></view>
+		<view class="helped-end" v-if="noticeDetail.done === '1' && noticeDetail.userId === noticeVisitInfo.id">
+			<view style="width: 70%;margin-left: 50rpx;"><u--text type="info" size="10" text="(如已完成请点击按钮)"></u--text></view>
 			<view style="width: 30%; background-color: red; height: 100%">
 				<view
 					@click="show = true"
@@ -69,7 +73,37 @@
 		</view>
 		<!-- 弹出层 -->
 		<view>
-			<u-popup mode="center" round="20" :show="show" @close="close" @open="open"><view style="height: 650rpx; width: 700rpx"></view></u-popup>
+			<u-popup mode="center" round="20" :show="show" @close="close" @open="open">
+				<view style="height: 650rpx; width: 700rpx">
+					<view class="search_user_top" style="display: flex;">
+						<view style="margin: 40rpx 0 0 50rpx;"><text style="font-size: 50rpx;font-weight: 600;">搜索用户</text></view>
+					</view>
+					<view class="search_user" style="width: 80%;margin: 40rpx 0 0 45rpx;">
+						<view class="u-demo-block__content">
+							<view class="u-page__tag-item">
+								<u-search
+									v-model="keyWords"
+									:show-action="false"
+									@search="searchUserByUserName(keyWords)"
+									@blur="searchUserByUserName(keyWords)"
+									borderColor="rgb(230, 230, 230)"
+									bgColor="#fff"
+								></u-search>
+							</view>
+						</view>
+					</view>
+					<view class="search_user_main" style="width: 80%;height: 30%;margin: 50rpx auto 0 auto;">
+						<view style="display: flex" v-if="showSearchUser">
+							<view style="margin: 30rpx 0 0 20rpx"><u-avatar :src="searchUserInfo.avatarUrl" size="45"></u-avatar></view>
+							<view style="margin: 40rpx 0 0 20rpx;width: 60%;"><u--text size="20" bold :text="searchUserInfo.userName"></u--text></view>
+							<view class="choose_user" style="margin-top: 30rpx;"><u-button type="primary" plain text="就是你!"></u-button></view>
+						</view>
+						<view v-if="!showSearchUser" style="margin: 100rpx 0 0 auto;">
+							<text style="color: #7e7e7e;font-size: 30rpx;margin: 70rpx;">当前未找到用户( ╯-_-)╯┴—┴</text>
+						</view>
+					</view>
+				</view>
+			</u-popup>
 		</view>
 		<!-- 底部(已帮助)大家都可以看到 -->
 		<view class="helped-end" v-if="noticeDetail.done === '0'">
@@ -99,11 +133,14 @@ import { getNoticeFoundNoticeDetail } from '@/common/api/laf/found.js';
 import { getLostNoticeDetail } from '@/common/api/laf/lost.js';
 import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
 import { getToken } from '@/utils/token.js';
-import { getOtherUserBasicInfo } from '@/common/api/sys/userInfo.js';
+import { getOtherUserBasicInfo, getUserByUserName } from '@/common/api/sys/userInfo.js';
 export default {
 	name: 'noticeDetailPage',
 	data() {
 		return {
+			//是否显示搜索用户
+			showSearchUser: false,
+			keyWords: '',
 			//是否可以返回
 			ifBackToIndexPage: false,
 			//弹出层
@@ -112,26 +149,32 @@ export default {
 			fileList1: [],
 			//启示发布者信息
 			noticeCreatedInfo: {
-				id: '',
+				id: '3',
 				userName: '',
 				phoneNumber: '',
 				avatarUrl: ''
 			},
 			//启示访问者信息
 			noticeVisitInfo: {
-				id: '',
+				id: '1',
 				userName: ''
 			},
 			//启示信息
 			noticeDetail: {
 				id: '',
-				createdUserId: '',
+				userId: '2',
 				message: '',
 				type: '', //启示类型0(寻物),1(拾物)
 				urgency: '',
-				done: '1',
+				done: '',
 				helpedId: '',
 				view: '0'
+			},
+			//搜索用户return信息
+			searchUserInfo: {
+				id: '',
+				userName: '',
+				avatarUrl: ''
 			},
 			//图片展示
 			albumWidth: 0,
@@ -204,7 +247,7 @@ export default {
 		},
 		//返回index界面
 		backToIndexPage() {
-			uni.switchTab({
+			uni.reLaunch({
 				url: '../../index/index'
 			});
 		},
@@ -232,6 +275,18 @@ export default {
 				console.log(res);
 				this.noticeCreatedInfo = res.data.data;
 			});
+		},
+		//根据用户id 获取用户名
+		searchUserByUserName(userName) {
+			getUserByUserName(userName).then(res => {
+				console.log(res);
+				if (res.data.code === 200) {
+					this.searchUserInfo = res.data.data;
+					this.showSearchUser = true;
+				} else if (res.data.code === 400) {
+					this.showSearchUser = false;
+				}
+			});
 		}
 	},
 	//获取url参数
@@ -247,7 +302,7 @@ export default {
 
 <style lang="scss" scoped>
 page {
-	background-color: #ffffff;
+	background-color: #f4f4f4;
 	height: 100%;
 }
 .album {
@@ -267,21 +322,21 @@ page {
 }
 .notice-message {
 	height: 200rpx;
-	background-color: #fff2fa;
+	background-color: #ffe5ee;
 	border-radius: 20rpx;
 	margin-left: 20rpx;
 	margin-right: 20rpx;
 }
 .userInfoMessage {
 	height: 250rpx;
-	background-color: #f2f4ff;
+	background-color: #ffffff;
 	border-radius: 20rpx;
 	margin: 40rpx 20rpx 0 20rpx;
 }
 .helped-end {
 	width: 100%;
 	height: 90rpx;
-	background-color: #f2f5ff;
+	background-color: #ffffff;
 	position: fixed;
 	/* #ifndef H5 */
 	bottom: 0rpx;
