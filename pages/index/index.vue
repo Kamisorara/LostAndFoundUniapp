@@ -43,7 +43,7 @@
 				</view>
 				<view @click="toNoticeDetailPage(item.id)">
 					<view class="post-message-message" style="height: 100rpx;background-color:#FFFFFF;margin-left: 140rpx;margin-right: 30rpx;display: inline-block;">
-						<text>在{{ item.message }}</text>
+						<text>{{ item.message }}</text>
 					</view>
 					<view
 						class="post-message-img"

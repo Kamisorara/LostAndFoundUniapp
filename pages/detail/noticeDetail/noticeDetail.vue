@@ -219,7 +219,7 @@ export default {
 		uploadFilePromise(url) {
 			return new Promise((resolve, reject) => {
 				let a = uni.uploadFile({
-					url: baseUrl + 'http://192.168.31.174:8081/laf/person/fastdfs-upload', // 仅为示例，非真实的接口地址
+					url: 'http://192.168.31.174:8081/laf/person/fastdfs-upload', // 仅为示例，非真实的接口地址
 					filePath: url,
 					name: 'file',
 					formData: {
@@ -289,7 +289,6 @@ export default {
 				}
 			});
 		}
-		
 	},
 	//获取url参数
 	onLoad(data) {

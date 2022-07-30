@@ -30,25 +30,20 @@
 			</view>
 		</view>
 		<u-loadmore :status="status" :loading-text="loadMore.loadingText" :loadmore-text="loadMore.loadmoreText" :nomore-text="loadMore.nomoreText" icon />
+		<!-- toast弹窗 -->
+		<view><u-toast ref="uToast"></u-toast></view>
 	</view>
 </template>
 
 <script>
 import { getAllFoundList } from '@/common/api/laf/found.js';
+import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
 export default {
 	name: '',
 	data() {
 		return {
 			//拾物启事列表
-			foundList: [
-				{
-					id: 1,
-					userName: 'Kamisora',
-					message: '丢失一个airpods pro 有没有人看到',
-					lafPhotoUrl: 'https://img1.baidu.com/it/u=358105290,730157327&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656781200&t=7849921314e7abf94a336061c0f659c8',
-					avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png'
-				}
-			],
+			foundList: [],
 			//page
 			pageSize: 6, //每页加载的个数
 			pageNum: 1, //当前的页数
@@ -85,6 +80,26 @@ export default {
 				}
 				this.pageNum++;
 			});
+		},
+		//验证用户登录情况
+		getLoginStatus() {
+			virifyLoginStatus().then(res => {
+				console.log(res);
+				if (res.data.code === 200) {
+					this.getAllFoundLists();
+				} else {
+					this.$refs.uToast.show({
+						title: '账户未登录',
+						type: 'error',
+						message: '账户未登录,请前往登录!'
+					});
+					setTimeout(()=>{
+						uni.switchTab({
+							url:'/pages/person/person'
+						})
+					},1000)
+				}
+			});
 		}
 	},
 	// 加载更多
@@ -97,7 +112,8 @@ export default {
 		}, 200);
 	},
 	onReady() {
-		this.getAllFoundLists();
+		//访问此界面首先验证登陆
+		this.getLoginStatus();
 	},
 	onPullDownRefresh() {
 		uni.redirectTo({
