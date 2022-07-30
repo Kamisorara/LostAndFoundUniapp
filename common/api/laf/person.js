@@ -16,3 +16,8 @@ export function getUserNoticeBadgeValue() {
 export function getUserWaitingNoticeLists() {
 	return request.get(urlHead + '/user-waiting');
 }
+
+//根据启示id删除自己发布的启示
+export function deleteUserPersonalNotice(noticeId) {
+	return request.post(urlHead + '/delete-personal-notice' + "?id=" + noticeId);
+}

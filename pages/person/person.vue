@@ -47,9 +47,9 @@
 		>
 			<view @click="toLoginPage()" class="person-main-head" style="height: 200rpx;display: flex;">
 				<view class="avatar" style="margin-left: 70rpx;margin-top: 40rpx;"><u-avatar :src="userInfo.avatarUrl" size="70"></u-avatar></view>
-				<view style="margin-top: 75rpx;margin-left: 40rpx;"><u--text type="info" size="20" text="用户未登录,点击登录"></u--text></view>
+				<view style="margin-top: 75rpx;margin-left: 40rpx;"><u--text  type="info" size="20" text="用户未登录,点击登录"></u--text></view>
 			</view>
-			<view @click="toRegisterPage()" style="margin-top: 140rpx;margin-left: 470rpx;"><u--text type="info" size="10" text="没有账号?点击注册"></u--text></view>
+			<view @click="toRegisterPage()" style="margin-top: 140rpx;margin-left: 470rpx;"><u--text decoration="underline" type="info" size="10" text="没有账号?点击注册"></u--text></view>
 		</view>
 	</view>
 </template>

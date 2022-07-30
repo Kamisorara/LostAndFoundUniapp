@@ -48,13 +48,13 @@ export default {
 			createFoundNotice(this.model1.noticeInfo).then(res => {
 				console.log(res);
 				if (res.data.code === 200) {
-					this.toNoticeDetailPage();
+					this.toPersonPage();
 				}
 			});
 		},
 		//跳转至待处理界面
-		toNoticeDetailPage() {
-			uni.switchTab({
+		toPersonPage() {
+			uni.reLaunch({
 				url: '../../person/person'
 			});
 		}

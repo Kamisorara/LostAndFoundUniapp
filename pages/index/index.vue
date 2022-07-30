@@ -25,7 +25,6 @@
 		</u-sticky>
 		<!-- 组件部分 -->
 		<index_index :userIsLogin="userIsLogin" v-if="currentChoise === 0"></index_index>
-		<!-- <index_recent v-if="currentChoise === 1"></index_recent> -->
 		<view v-if="currentChoise === 1" class="index_recent">
 			<!-- 用户发布 -->
 			<view v-for="(item, MesssageIndex) in noticeList" :key="MesssageIndex" class="post-message">
@@ -42,21 +41,17 @@
 						<text style="margin-left: 10rpx;font-size:35rpx;color: darkgray;font-weight: 600;">0</text>
 					</view>
 				</view>
-				<view class="post-message-message" style="height: 100rpx;background-color:#FFFFFF;margin-left: 140rpx;margin-right: 30rpx;display: inline-block;">
-					<text>在{{ item.message }}</text>
-				</view>
-				<view
-					class="post-message-img"
-					style="height: 360rpx;background-color:#FFFFFF;margin-top: 20rpx;margin-left: 30rpx;margin-right: 30rpx;display: flex;flex-wrap: wrap;"
-				>
-					<view v-for="(photo, photoIndex) in item.lafPhotoUrls" :key="photoIndex" class="post-img" style="margin-left: 65rpx;margin-top: 20rpx;">
-						<u--image
-							radius="10rpx"
-							:showLoading="true"
-							src="https://img1.baidu.com/it/u=3569420573,2690721824&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1656781200&t=550933ea35463883a98741e144cf95c7"
-							width="120px"
-							height="80px"
-						></u--image>
+				<view @click="toNoticeDetailPage(item.id)">
+					<view class="post-message-message" style="height: 100rpx;background-color:#FFFFFF;margin-left: 140rpx;margin-right: 30rpx;display: inline-block;">
+						<text>在{{ item.message }}</text>
+					</view>
+					<view
+						class="post-message-img"
+						style="height: 360rpx;background-color:#FFFFFF;margin-top: 20rpx;margin-left: 30rpx;margin-right: 30rpx;display: flex;flex-wrap: wrap;"
+					>
+						<view v-for="(photo, photoIndex) in item.lafPhotoUrls" :key="photoIndex" class="post-img" style="margin-left: 65rpx;margin-top: 20rpx;">
+							<u--image radius="10rpx" :showLoading="true" :src="photo" width="120px" height="80px"></u--image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -119,14 +114,11 @@ export default {
 				{
 					id: '',
 					userId: '',
-					userName: 'Kamisora',
+					userName: '',
 					type: '',
-					message: '丢失一个airpods pro 有没有人看到',
-					avatarUrl: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/29/3a22a87c-a150-4165-a453-5d69566a3094.png',
-					lafPhotoUrls: [
-						'https://img1.baidu.com/it/u=358105290,730157327&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656781200&t=7849921314e7abf94a336061c0f659c8',
-						'https://img1.baidu.com/it/u=358105290,730157327&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656781200&t=7849921314e7abf94a336061c0f659c8'
-					]
+					message: '',
+					avatarUrl: '',
+					lafPhotoUrls: []
 				}
 			]
 		};
@@ -143,6 +135,14 @@ export default {
 			if (this.userIsLogin === true) {
 				uni.navigateTo({
 					url: '../detail/personDetail/personalPage'
+				});
+			}
+		},
+		//前往启示详情界面
+		toNoticeDetailPage(noticeId) {
+			if (this.userIsLogin === true) {
+				uni.navigateTo({
+					url: '../detail/noticeDetail/noticeDetail' + '?id=' + noticeId
 				});
 			}
 		},

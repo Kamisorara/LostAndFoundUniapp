@@ -15,7 +15,7 @@
 				</view>
 				<view class="waiting-upload-button">
 					<view style="width: 40%;"></view>
-					<view @click="show = true" class="cancel" style="height: 40rpx;width: 160rpx;border-radius: 30rpx;border: 1px dashed #3d3d3d;display: flex;">
+					<view @click="cancelDoWith(item.id)" class="cancel" style="height: 40rpx;width: 160rpx;border-radius: 30rpx;border: 1px dashed #3d3d3d;display: flex;">
 						<text style="color:#6d6d6d;font-size: 30rpx;margin: auto;">取消处理</text>
 					</view>
 					<view
@@ -27,14 +27,23 @@
 					</view>
 				</view>
 				<!-- 弹出确认框 -->
-				<u-modal :show="show" showCancelButton cancelText="不了不了~" confirmText="删了!" @cancel="close" @confirm="confirm" :title="title" :content="content"></u-modal>
+				<u-modal
+					:show="show"
+					showCancelButton
+					cancelText="不了不了~"
+					confirmText="删了!"
+					@cancel="close"
+					@confirm="confirm(currentChooseNotice)"
+					:title="title"
+					:content="content"
+				></u-modal>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-import { getUserWaitingNoticeLists } from '@/common/api/laf/person.js';
+import { getUserWaitingNoticeLists, deleteUserPersonalNotice } from '@/common/api/laf/person.js';
 export default {
 	name: 'myWaiting',
 	data() {
@@ -45,7 +54,9 @@ export default {
 			content: '你确定要删除此条内容嘛 ≖‿≖',
 			list: ['待上传', '待完成'],
 			curNow: 0,
-			noticeWaitingLists: []
+			noticeWaitingLists: [],
+			//当前选择的notice
+			currentChooseNotice: ''
 		};
 	},
 	methods: {
@@ -53,11 +64,17 @@ export default {
 		sectionChange(index) {
 			this.curNow = index;
 		},
+		//点击取消处理
+		cancelDoWith(noticeId) {
+			this.show = true;
+			this.currentChooseNotice = noticeId;
+		},
 		//弹出确认框
 		close() {
 			this.show = false;
 		},
-		confirm() {
+		confirm(noticeId) {
+			this.deletePersonalNotice(noticeId);
 			this.show = false;
 		},
 		//前往启示界面
@@ -71,6 +88,15 @@ export default {
 			getUserWaitingNoticeLists().then(res => {
 				console.log(res);
 				this.noticeWaitingLists = res.data.data;
+			});
+		},
+		//删除用户启示
+		deletePersonalNotice(noticeId) {
+			deleteUserPersonalNotice(noticeId).then(res => {
+				console.log(res);
+				if (res.data.code === 200) {
+					this.getUserWaitingNoticeList();
+				}
 			});
 		}
 	},

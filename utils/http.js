@@ -1,4 +1,5 @@
-const baseUrl = 'http://192.168.31.174:8081'
+// const baseUrl = 'http://43.142.157.243:8081' //云服务器
+const baseUrl = 'http://192.168.31.174:8081' //本地
 
 const request = (options = {}) => {
 	let token = "";
