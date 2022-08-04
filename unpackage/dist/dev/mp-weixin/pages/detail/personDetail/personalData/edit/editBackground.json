@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "个性背景",
+  "navigationBarBackgroundColor": "#fff9f0",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-upload": "/uni_modules/uview-ui/components/u-upload/u-upload",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast"
+  }
+}

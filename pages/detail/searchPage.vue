@@ -4,10 +4,12 @@
 		<u-navbar :autoBack="false" bgColor="#ece8e5">
 			<view class="u-nav-slot" slot="left" style="display: flex;">
 				<u-icon @click="backIndexPage()" name="arrow-left" size="20"></u-icon>
-				<view style="margin-left: 100rpx;display: flex;width: rpx;">
-					<u-search placeholder="搜索你要的" :focus="true" v-model="keyword" :show-action="false"></u-search>
+				<view style="margin-left: 40rpx;display: flex;width: 450rpx;">
+					<u-search placeholder="搜索你要的" @search="addToHistory(keyword)" :focus="true" v-model="keyword" :show-action="false"></u-search>
 				</view>
-				<view class="button" style="margin-left: 45rpx;width: 100rpx;"><u-button @click="addToHistory(keyword)" shape="circle" type="error" text="搜索"></u-button></view>
+				<view class="button" style="position: absolute;left: 430rpx;top: 15rpx;">
+					<u-button @click="addToHistory(keyword)" size="small" shape="circle" type="error" text="搜索"></u-button>
+				</view>
 			</view>
 		</u-navbar>
 		<view class="none-search" style="margin-top: 200rpx;margin-left: 250rpx;" v-if="!historySearch.length"><u--text type="info" size="20" text="暂无历史搜索"></u--text></view>

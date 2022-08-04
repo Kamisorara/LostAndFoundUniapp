@@ -15,3 +15,5 @@ export function getOtherUserBasicInfo(userId) {
 export function getUserByUserName(userName) {
 	return request.post(urlHead + '/search-user' + '?userName=' + userName);
 }
+
+

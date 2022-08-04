@@ -4,14 +4,14 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "LostAndFound主页",
-				"navigationBarBackgroundColor": "#f0eee1",
+				"navigationBarBackgroundColor": "#ffffff",
 				"enablePullDownRefresh": true
 			}
 		},
 		{
-			"path": "pages/chat/chat",
+			"path": "pages/inform/inform",
 			"style": {
-				"navigationBarTitleText": "聊天",
+				"navigationBarTitleText": "对话",
 				"navigationBarBackgroundColor": "#f0eee1",
 				"enablePullDownRefresh": true
 			}
@@ -36,7 +36,7 @@
 			"path": "pages/person/person",
 			"style": {
 				"navigationBarTitleText": "关于我",
-				"navigationBarBackgroundColor": "#f0eee1",
+				"navigationBarBackgroundColor": "#e9f0e6",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -99,8 +99,9 @@
 		{
 			"path": "pages/detail/personDetail/personalPage",
 			"style": {
-				"navigationBarTitleText": "个人空间",
-				"navigationBarBackgroundColor": "#eed9ff"
+				"navigationBarTitleText": "个人中心",
+				"navigationBarBackgroundColor": "#f2efff",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -116,6 +117,35 @@
 			"style": {
 				"navigationBarTitleText": "启示",
 				"navigationBarBackgroundColor": "#ffd5d5"
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/personalData/personalData",
+			"style": {
+				"navigationBarTitleText": "个人资料",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/personalData/edit/editUserName",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/personalData/edit/editPhoneNum",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/detail/personDetail/personalData/edit/editBackground",
+			"style": {
+				"navigationBarTitleText": "个性背景",
+				"navigationBarBackgroundColor": "#fff9f0",
+				"enablePullDownRefresh": false
 			}
 		}
 	],
@@ -148,8 +178,8 @@
 				"selectedIconPath": "static/selected/a-0_paisongyuqianshou.png"
 			},
 			{
-				"text": "对话",
-				"pagePath": "pages/chat/chat",
+				"text": "通知",
+				"pagePath": "pages/inform/inform",
 				"iconPath": "static/unselected/xiaoxi.png",
 				"selectedIconPath": "static/selected/xiaoxi_full.png"
 			},

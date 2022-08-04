@@ -135,6 +135,7 @@ import { getLostNoticeDetail } from '@/common/api/laf/lost.js';
 import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
 import { getToken } from '@/utils/token.js';
 import { getOtherUserBasicInfo, getUserByUserName } from '@/common/api/sys/userInfo.js';
+import ipAddr from '@/utils/config.js';
 export default {
 	name: 'noticeDetailPage',
 	data() {
@@ -219,7 +220,7 @@ export default {
 		uploadFilePromise(url) {
 			return new Promise((resolve, reject) => {
 				let a = uni.uploadFile({
-					url: 'http://192.168.31.174:8081/laf/person/fastdfs-upload', // 仅为示例，非真实的接口地址
+					url: ipAddr.baseurl + '/laf/person/fastdfs-upload', // 仅为示例，非真实的接口地址
 					filePath: url,
 					name: 'file',
 					formData: {

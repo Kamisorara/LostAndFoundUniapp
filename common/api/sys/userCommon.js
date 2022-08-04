@@ -31,3 +31,8 @@ export function judgeEmailOnlyOne(emailAddr) {
 export function judgeUserNameOnlyOne(userName) {
 	return request.post(urlHead + '/judge-userName-only' + "?userName=" + userName);
 }
+
+//登录输入账号昵称时获取该用户的头像
+export function getLoginUserAvatarByUserName(userName) {
+	return request.get(urlHead + '/get-loginUser-avatar' + '?username=' + userName);
+}

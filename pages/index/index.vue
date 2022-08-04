@@ -66,7 +66,6 @@
 
 <script>
 import index_index from '@/common/component/index_index.vue';
-import index_recent from '@/common/component/index_recent.vue';
 import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
 import { setToken, removeToken } from '@/utils/token.js';
 import { getBoardList, getRecentNotice } from '@/common/api/laf/index.js';
@@ -134,7 +133,7 @@ export default {
 		toPersonalPage() {
 			if (this.userIsLogin === true) {
 				uni.navigateTo({
-					url: '../detail/personDetail/personalPage'
+					url: '../detail/personDetail/personalPage' + '?id=' + this.userBasicInfo.id
 				});
 			}
 		},
@@ -149,6 +148,9 @@ export default {
 		//切换首页和最近
 		changeCurrentChoise(item) {
 			this.currentChoise = item.index;
+			if (this.currentChoise === 1) {
+				this.getRecentNoticeLists();
+			}
 		},
 		//弹出层open事件
 		open() {},
@@ -214,8 +216,7 @@ export default {
 	},
 	//组件
 	components: {
-		index_index,
-		index_recent
+		index_index
 	},
 	//返回顶部
 	onPageScroll(e) {
@@ -234,7 +235,7 @@ export default {
 	},
 	onReady() {
 		this.virifyLogin();
-		this.getRecentNoticeLists();
+		// this.getRecentNoticeLists();
 	},
 	onShow() {
 		this.virifyLogin();

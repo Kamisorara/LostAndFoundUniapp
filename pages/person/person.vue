@@ -6,14 +6,14 @@
 		<view
 			v-if="loginStatus.isLogin == true"
 			class="person-main"
-			style="margin-right: 20rpx;margin-left: 20rpx;height: 400rpx;border-radius: 20rpx;margin-top: 60rpx;backdrop-filter: blur(40px);
+			style="margin-right: 20rpx;margin-left: 20rpx;height: 400rpx;border-radius: 20rpx;margin-top: 60rpx;backdrop-filter: blur(5px);
   color: #fff;
-  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);"
+  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);background: rgba(255, 255, 255, 0.4);"
 		>
 			<view class="person-main-head" style="height: 200rpx;display: flex;">
 				<view @click="toPersonalPage()" class="avatar" style="margin-left: 70rpx;margin-top: 40rpx;"><u-avatar :src="userInfo.avatarUrl" size="50"></u-avatar></view>
 				<view class="name" style="margin-top: 50rpx;margin-left: 30rpx;;width: 450rpx;">
-					<text @click="toPersonalPage()" style="font-weight: 600">{{ userInfo.userName }}</text>
+					<text @click="toPersonalPage()" style="font-weight: 600;color: #000000;">{{ userInfo.userName }}</text>
 					<view class="helped" style="font-size: 30rpx;color: #858585;">
 						<text>已帮助:</text>
 						<text style="font-size: 30rpx;color: darkgray;font-weight: 600;margin-left: 10rpx;">{{ userInfo.helpTimes }}</text>
@@ -47,9 +47,11 @@
 		>
 			<view @click="toLoginPage()" class="person-main-head" style="height: 200rpx;display: flex;">
 				<view class="avatar" style="margin-left: 70rpx;margin-top: 40rpx;"><u-avatar :src="userInfo.avatarUrl" size="70"></u-avatar></view>
-				<view style="margin-top: 75rpx;margin-left: 40rpx;"><u--text  type="info" size="20" text="用户未登录,点击登录"></u--text></view>
+				<view style="margin-top: 75rpx;margin-left: 40rpx;"><u--text type="info" size="20" text="用户未登录,点击登录"></u--text></view>
 			</view>
-			<view @click="toRegisterPage()" style="margin-top: 140rpx;margin-left: 470rpx;"><u--text decoration="underline" type="info" size="10" text="没有账号?点击注册"></u--text></view>
+			<view @click="toRegisterPage()" style="margin-top: 140rpx;margin-left: 470rpx;">
+				<u--text decoration="underline" type="info" size="10" text="没有账号?点击注册"></u--text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -70,8 +72,8 @@ export default {
 			imageURL: 'https://img2.baidu.com/it/u=2985725512,645211557&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1657213200&t=bf2b60bfd8a9ca7c5f15f09f4be3af91',
 			//用户信息
 			userInfo: {
-				id: '001',
-				userName: 'Kamisora',
+				id: '',
+				userName: '',
 				helpTimes: 0,
 				avatarUrl: '',
 				photoUrl: 'https://img0.baidu.com/it/u=3453439557,3514241062&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=729'
@@ -123,7 +125,7 @@ export default {
 		//前往个人中心
 		toPersonalPage() {
 			uni.navigateTo({
-				url: '../detail/personDetail/personalPage'
+				url: '../detail/personDetail/personalPage' + '?id=' + this.userInfo.id
 			});
 		},
 		//前往设置界面

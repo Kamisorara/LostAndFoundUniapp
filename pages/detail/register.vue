@@ -4,7 +4,7 @@
 			<view style="margin: 0 auto"><u-avatar src="src" size="80"></u-avatar></view>
 		</view>
 		<view class="register-form" style="margin-top: 100rpx">
-			<u--form labelPosition="left" :model="model1" :rules="rules" ref="registerForm">
+			<u--form labelPosition="left" :model="model1" ref="registerForm">
 				<u-form-item prop="userInfo.userName" borderBottom ref="userName">
 					<text style="font-weight: 600; font-size: 35rpx; margin-right: 40rpx">用户名</text>
 					<u--input
