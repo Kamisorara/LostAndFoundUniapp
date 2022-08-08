@@ -98,7 +98,8 @@ export default {
 					this.getUserWaitingNoticeList();
 				}
 			});
-		}
+		},
+		
 	},
 	onReady() {
 		this.getUserWaitingNoticeList();

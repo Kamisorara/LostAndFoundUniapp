@@ -14,15 +14,22 @@
 				</u-upload>
 			</view>
 		</view>
+
+		<view style="margin: 100rpx;" v-if="showLoading" class="loading"><u-loading-icon mode="circle" text="正在上传中,请稍等!"></u-loading-icon></view>
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
+import ipAddr from '@/utils/config.js';
+import { getToken } from '@/utils/token.js';
 export default {
 	data() {
 		return {
-			fileList1: []
+			//文件List
+			fileList1: [],
+			//显示加载
+			showLoading: false
 		};
 	},
 	methods: {
@@ -32,6 +39,7 @@ export default {
 		},
 		// 新增图片
 		async afterRead(event) {
+			this.showLoading = true;
 			// 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
 			let lists = [].concat(event.file);
 			let fileListLen = this[`fileList${event.name}`].length;
@@ -60,13 +68,18 @@ export default {
 		uploadFilePromise(url) {
 			return new Promise((resolve, reject) => {
 				let a = uni.uploadFile({
-					url: 'http://192.168.2.21:7001/upload', // 仅为示例，非真实的接口地址
+					url: ipAddr.baseurl + '/laf/person/update-background', // 仅为示例，非真实的接口地址
 					filePath: url,
 					name: 'file',
 					formData: {
 						user: 'test'
 					},
+					//请求头带上token
+					header: {
+						token: getToken('token')
+					},
 					success: res => {
+						this.showLoading = false;
 						setTimeout(() => {
 							let resp = JSON.parse(res.data);
 							if (resp.code === 200) {
@@ -92,8 +105,8 @@ export default {
 				message: '个性背景上传成功'
 			});
 			setTimeout(() => {
-				uni.navigateBack({
-					delta: 1
+				uni.reLaunch({
+					url: '/pages/person/person'
 				});
 			}, 1000);
 		}

@@ -75,8 +75,8 @@
 				</view>
 				<view class="notice-buttom" style="display: flex;margin-top: 20rpx;">
 					<view style="width: 55%;"></view>
-					<!-- <view v-if="notice.type === '0'" class="lost-urgency"><u-tag text="紧急寻物" type="error" plain></u-tag></view> -->
-					<view v-if="notice.type === '0'" class="lost"><u-tag text="寻物启事" type="warning" plain></u-tag></view>
+					<view v-if="notice.type === '0' && notice.urgency === '0'" class="lost-urgency"><u-tag text="紧急寻物" type="error" plain></u-tag></view>
+					<view v-if="notice.type === '0' && notice.urgency === '1'" class="lost"><u-tag text="寻物启事" type="warning" plain></u-tag></view>
 					<view v-if="notice.type === '1'" class="lost"><u-tag text="拾物启示" type="primary" plain></u-tag></view>
 					<view v-if="notice.done === '0'" class="done" style="margin-left: 30rpx;"><u-tag text="已完成" type="success"></u-tag></view>
 				</view>
@@ -111,7 +111,7 @@
 </template>
 <script>
 import { getUerReleasedNoticePage, getUserHelpedNoticePage, getUserBasicNum } from '@/common/api/laf/person.js';
-import { virifyLoginStatus, getOtherUserBasicInfo } from '@/common/api/sys/userInfo.js';
+import { virifyLoginStatus, getUserDetailInfo } from '@/common/api/sys/userInfo.js';
 export default {
 	name: 'personalPage',
 	data() {
@@ -170,10 +170,12 @@ export default {
 		},
 		//获取当前页面用户信息
 		getCurrentUserInfo(id) {
-			getOtherUserBasicInfo(id).then(res => {
+			getUserDetailInfo(id).then(res => {
 				console.log(res);
 				this.currentPageUserInfo = res.data.data;
-
+				if (res.data.data.photoUrl != null) {
+					this.backGroundImg = res.data.data.photoUrl;
+				}
 				//在获取当前页面用户信息后，进行请求
 				setTimeout(() => {
 					this.getReleasedNoticeLists(this.currentPageUserInfo.id, this.pageNum, this.pageSize);

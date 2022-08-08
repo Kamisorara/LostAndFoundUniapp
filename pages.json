@@ -11,15 +11,7 @@
 		{
 			"path": "pages/inform/inform",
 			"style": {
-				"navigationBarTitleText": "对话",
-				"navigationBarBackgroundColor": "#f0eee1",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/found/found",
-			"style": {
-				"navigationBarTitleText": "拾物启示",
+				"navigationBarTitleText": "通知",
 				"navigationBarBackgroundColor": "#f0eee1",
 				"enablePullDownRefresh": true
 			}
@@ -147,6 +139,14 @@
 				"navigationBarBackgroundColor": "#fff9f0",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/detail/searchDetail/searchDetail",
+			"style": {
+				"navigationBarTitleText": "搜搜",
+				"navigationBarBackgroundColor": "#fffdd8",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	//全局配置
@@ -166,16 +166,10 @@
 				"selectedIconPath": "static/selected/shequfuwu2.png"
 			},
 			{
-				"text": "寻物启事",
+				"text": "所有启示",
 				"pagePath": "pages/lost/lost",
 				"iconPath": "static/unselected/a-0_jichuchaxun.png",
 				"selectedIconPath": "static/selected/a-0_jichuchaxun.png"
-			},
-			{
-				"text": "拾物启示",
-				"pagePath": "pages/found/found",
-				"iconPath": "static/unselected/a-0_paisongyuqianshou.png",
-				"selectedIconPath": "static/selected/a-0_paisongyuqianshou.png"
 			},
 			{
 				"text": "通知",

@@ -38,8 +38,12 @@
 		<!-- 启示用户信息 -->
 		<view class="userInfoMessage">
 			<view style="display: flex">
-				<view style="margin: 30rpx 0 0 20rpx"><u-avatar :src="noticeCreatedInfo.avatarUrl" size="45"></u-avatar></view>
-				<view style="margin: 30rpx 0 0 20rpx"><u--text size="20" bold :text="noticeCreatedInfo.userName"></u--text></view>
+				<view @click="toNoticePostUserInfoPage(noticeCreatedInfo.id)" style="margin: 30rpx 0 0 20rpx">
+					<u-avatar :src="noticeCreatedInfo.avatarUrl" size="45"></u-avatar>
+				</view>
+				<view @click="toNoticePostUserInfoPage(noticeCreatedInfo.id)" style="margin: 30rpx 0 0 20rpx;width: 50%;">
+					<u--text size="20" bold :text="noticeCreatedInfo.userName"></u--text>
+				</view>
 			</view>
 			<view
 				style="
@@ -96,7 +100,9 @@
 						<view style="display: flex" v-if="showSearchUser">
 							<view style="margin: 30rpx 0 0 20rpx"><u-avatar :src="searchUserInfo.avatarUrl" size="45"></u-avatar></view>
 							<view style="margin: 40rpx 0 0 20rpx;width: 60%;"><u--text size="20" bold :text="searchUserInfo.userName"></u--text></view>
-							<view class="choose_user" style="margin-top: 30rpx;"><u-button type="primary" plain text="就是你!"></u-button></view>
+							<view class="choose_user" style="margin-top: 30rpx;">
+								<u-button @click="updateUserNoticeDone(noticeDetail.id, searchUserInfo.id)" type="primary" plain text="就是你!"></u-button>
+							</view>
 						</view>
 						<view v-if="!showSearchUser" style="margin: 100rpx 0 0 auto;">
 							<text style="color: #7e7e7e;font-size: 30rpx;margin: 70rpx;">当前未找到用户( ╯-_-)╯┴—┴</text>
@@ -125,17 +131,19 @@
 				</view>
 			</view>
 		</view>
+		<!-- toast弹窗 -->
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
-// import baseUrl from '@/utils/config.js';
 import { getNoticeFoundNoticeDetail } from '@/common/api/laf/found.js';
 import { getLostNoticeDetail } from '@/common/api/laf/lost.js';
 import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
 import { getToken } from '@/utils/token.js';
 import { getOtherUserBasicInfo, getUserByUserName } from '@/common/api/sys/userInfo.js';
 import ipAddr from '@/utils/config.js';
+import { helpedPeople } from '@/common/api/laf/person.js';
 export default {
 	name: 'noticeDetailPage',
 	data() {
@@ -253,6 +261,12 @@ export default {
 				url: '../../index/index'
 			});
 		},
+		//前往启示发布者个人界面
+		toNoticePostUserInfoPage(userId) {
+			uni.navigateTo({
+				url: '/pages/detail/personDetail/personalPage' + '?id=' + userId
+			});
+		},
 		//验证用户登录状态并且获取当前访问者的基本信息包括id,userName,avatarUrl
 		getVisitUserInfo() {
 			virifyLoginStatus().then(res => {
@@ -287,6 +301,32 @@ export default {
 					this.showSearchUser = true;
 				} else if (res.data.code === 400) {
 					this.showSearchUser = false;
+				}
+			});
+		},
+		//更新用户notice状态为已完成状态
+		updateUserNoticeDone(noticeId, userId) {
+			helpedPeople(noticeId, userId).then(res => {
+				console.log(res);
+				//关闭窗口
+				this.show = false;
+				if (res.data.code === 200) {
+					this.$refs.uToast.show({
+						title: '确认成功',
+						type: 'success',
+						message: res.data.msg
+					});
+					setTimeout(() => {
+						uni.reLaunch({
+							url: '/pages/index/index'
+						});
+					}, 1000);
+				} else if (res.data.code === 400) {
+					this.$refs.uToast.show({
+						title: '确认失败',
+						type: 'error',
+						message: res.data.msg
+					});
 				}
 			});
 		}

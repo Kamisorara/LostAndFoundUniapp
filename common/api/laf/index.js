@@ -31,3 +31,10 @@ export function getSimpleUrgencyLostList() {
 export function getRecentNotice(pageNum, pageSize) {
 	return request.get(urlHead + '/get-recent-notice' + '?pageNum=' + pageNum + '&pageSize=' + pageSize);
 }
+
+
+//分页获取根据KeyWords搜索到的内容
+export function getSearchResp(keyWords, pageNum, pageSize) {
+	return request.post(urlHead + '/search' + '?keyWords=' + keyWords + '&pageNum=' + pageNum + '&pageSize=' +
+	pageSize);
+}

@@ -55,3 +55,9 @@ export function updateUserName(userName) {
 export function updatePhoneNum(phoneNum) {
 	return request.post(urlHead + '/update-phoneNum' + "?phoneNum=" + phoneNum);
 }
+
+
+//填写用户id 将用户启示更新为已完成状态
+export function helpedPeople(noticeId, userId) {
+	return request.post(urlHead + '/helped-people' + '?id=' + noticeId + '&userId=' + userId);
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "搜搜",
+  "navigationBarBackgroundColor": "#fffdd8",
+  "enablePullDownRefresh": false,
+  "usingComponents": {}
+}

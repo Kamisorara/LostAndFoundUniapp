@@ -18,20 +18,28 @@
 			<view class="hot-search">
 				<view class="hot-tit" style="display: flex;">
 					<u--text size="19" text="历史搜索"></u--text>
-					<view @click="clearHistory()" style="margin-right: 20rpx;"><u-icon size="25" name="trash-fill"></u-icon></view>
+					<view @click="show = true" style="margin-right: 20rpx;"><u-icon size="25" name="trash-fill"></u-icon></view>
 				</view>
 				<view class="hot-con clearfix" style="display: flex;flex-wrap: wrap;margin-top: 30rpx;">
-					<view class="item" style="margin-left: 20rpx;margin-top: 20rpx;" v-for="(item, index) in historySearch" :key="index"><u-tag plain :text="item"></u-tag></view>
+					<view class="item" style="margin-left: 20rpx;margin-top: 40rpx;" v-for="(item, index) in historySearch" :key="index">
+						<u-tag @click="toSearchDetailPage(item)" plain :text="item"></u-tag>
+					</view>
 				</view>
 			</view>
 		</view>
+		<!-- 弹出确认框 -->
+		<u-modal :show="show" showCancelButton cancelText="不了不了~" confirmText="删了!" @cancel="close" @confirm="confirm()" :title="title" :content="content"></u-modal>
 	</view>
 </template>
-
 <script>
 export default {
 	data() {
 		return {
+			//模态框显示
+			show: false,
+			//模态框标题
+			title: '确认',
+			content: '确定要删除历史搜索吗?',
 			// 用户输入的关键词
 			keyword: '',
 			//历史搜索
@@ -39,10 +47,25 @@ export default {
 		};
 	},
 	methods: {
+		//模态框关闭methods
+		close() {
+			this.show = false;
+		},
+		//模态框确认事件
+		confirm() {
+			this.clearHistory();
+			this.show = false;
+		},
 		//返回主页
 		backIndexPage() {
 			uni.navigateBack({
 				delta: 1
+			});
+		},
+		//前往搜索详情界面
+		toSearchDetailPage(keyWords) {
+			uni.navigateTo({
+				url: '/pages/detail/searchDetail/searchDetail' + '?keyWords=' + keyWords
 			});
 		},
 		//获取历史搜索
@@ -78,6 +101,8 @@ export default {
 				words.unshift(keyword);
 				uni.setStorageSync('historySearch', JSON.stringify(words));
 			}
+			//前往搜索详情界面
+			this.toSearchDetailPage(keyword);
 		},
 		//清除历史搜索（清空缓存）
 		clearHistory() {

@@ -1,7 +1,9 @@
 <template>
 	<view class="index">
 		<view class="search" style="display: flex;height: 100rpx;background-color: #FFFFFF;">
-			<view @click="toPersonalPage()" class="avatar" style="margin-top: 15rpx;margin-left: 15rpx;"><u-avatar :src="userBasicInfo.avatarUrl" size="40"></u-avatar></view>
+			<view @click="toPersonalPage(userBasicInfo.id)" class="avatar" style="margin-top: 15rpx;margin-left: 15rpx;">
+				<u-avatar :src="userBasicInfo.avatarUrl" size="40"></u-avatar>
+			</view>
 			<view @click="toSearchPage()" class="serach" style="width: 500rpx;margin-left: 30rpx;margin-top: 20rpx;">
 				<u-search placeholder="搜索你要的" v-model="keyword" :show-action="false"></u-search>
 			</view>
@@ -19,7 +21,13 @@
 			</view>
 		</u-popup>
 		<u-sticky>
-			<view class="tab" style="background-color: #FFFFFF;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx;">
+			<view
+				class="tab"
+				style="border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx;
+			background: rgba(255, 255, 255, 0.5);
+			backdrop-filter: blur(5px);
+			"
+			>
 				<u-tabs :list="list1" @click="changeCurrentChoise" :scrollable="false"></u-tabs>
 			</view>
 		</u-sticky>
@@ -28,10 +36,25 @@
 		<view v-if="currentChoise === 1" class="index_recent">
 			<!-- 用户发布 -->
 			<view v-for="(item, MesssageIndex) in noticeList" :key="MesssageIndex" class="post-message">
+				<!-- 紧急 -->
 				<view class="tabs" style="margin-left: 20rpx;width: 110rpx;">
-					<u-tag text="紧急" plain type="error" size="mini" icon="https://img1.baidu.com/it/u=345396241,529780618&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"></u-tag>
+					<u-tag
+						v-if="item.urgency === '0' && item.type === '0'"
+						text="紧急"
+						plain
+						type="error"
+						size="mini"
+						icon="https://img1.baidu.com/it/u=345396241,529780618&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+					></u-tag>
 				</view>
-				<view class="post-message-title" style="display: flex;background-color:#FFFFFF;height: 90rpx;">
+				<!-- 拾物 -->
+				<view v-if="item.type === '0' && item.urgency === '1'" class="lost" style="width: 20%;margin-left: 20rpx;">
+					<u-tag text="寻物启事" type="warning" plain></u-tag>
+				</view>
+
+				<!-- 寻物 -->
+				<view v-if="item.type === '1'" class="lost" style="width: 20%;margin-left: 20rpx;"><u-tag text="拾物启示" type="primary" plain></u-tag></view>
+				<view @click="toPersonalPage(item.userId)" class="post-message-title" style="display: flex;background-color:#FFFFFF;height: 90rpx;">
 					<view class="title-avatar" style="margin-left:30rpx;margin-top: 10rpx;"><u-avatar :src="item.avatarUrl" size="40"></u-avatar></view>
 					<view class="post-message-userName" style="font-size: 40rpx;margin-top: 20rpx;margin-left: 40rpx;width: 400rpx;">
 						<text>{{ item.userName }}</text>
@@ -130,10 +153,10 @@ export default {
 			});
 		},
 		//前往个人界面
-		toPersonalPage() {
+		toPersonalPage(userId) {
 			if (this.userIsLogin === true) {
 				uni.navigateTo({
-					url: '../detail/personDetail/personalPage' + '?id=' + this.userBasicInfo.id
+					url: '../detail/personDetail/personalPage' + '?id=' + userId
 				});
 			}
 		},

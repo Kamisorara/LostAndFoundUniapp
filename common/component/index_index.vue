@@ -3,7 +3,14 @@
 		<!-- 通告 -->
 		<u-notice-bar :text="text1"></u-notice-bar>
 		<!-- 公告板 -->
-		<view class="main" style="height: 300rpx;background-color: #fffdde;margin-top: 40rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
+		<view
+			class="main"
+			style="height: 300rpx;background-color: #fffdde;margin-top: 40rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;
+		box-shadow: 0 0 30px 10px rgba(202, 202, 202, 0.4);
+		background: rgba(255, 250, 175, 0.5);
+		backdrop-filter: blur(5px)
+		"
+		>
 			<view class="board_head" style="text-align: center"><text style="font-size: 35rpx;font-weight: 800;color:black">今日公告</text></view>
 			<u-divider text="分割线" :dot="true"></u-divider>
 			<view v-for="(item, index) in boardList" :key="index" class="board-position">
@@ -12,14 +19,15 @@
 		</view>
 		<!-- 排行榜和今日多帮助他人 -->
 		<view class="rank-best" style="display: flex;">
-			<view class="rank" style="height: 300rpx;width:345rpx;background-color: #dfd5de;margin-top: 50rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
-				<view class="rank-title" style="text-align: center;margin-top: 20rpx;font-weight: 600;"><text>排行榜</text></view>
+			<view class="rank" style="height: 400rpx;width:345rpx;background-color: #dfd2da;margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
+				<view class="rank-title" style="text-align: center;margin-top: 20rpx;font-weight: 600;"><text>热心市民</text></view>
 				<view
 					class="rank-main"
 					v-for="(item, index) in rankList"
 					:key="index"
 					:class="{ no1: index === 0, no2: index === 1, no3: index === 2 }"
-					style="display: flex;margin-top: 20rpx;margin-left: 10rpx;"
+					style="display: flex;margin-top: 50rpx;margin-left: 15rpx;"
+					@click="toRankListUserInfoPage(item.id)"
 				>
 					<text style="font-weight: 600;font-size: 40rpx;">{{ index + 1 }}.</text>
 					<u-avatar :src="item.avatarUrl" size="30"></u-avatar>
@@ -28,19 +36,21 @@
 			</view>
 			<view class="best" style="height: 300rpx;width:345rpx;background-color: #9be9e9;margin-top: 50rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;">
 				<view class="best-title" style="text-align: center;margin-top: 20rpx;font-weight: 600;"><text>今日最佳</text></view>
-				<view class="best-main" style="margin-left: 130rpx;margin-top: 30rpx;"><u-avatar :src="todayBest.avatar" size="40"></u-avatar></view>
-				<view class="best-main-name" style="margin-top: 30rpx;text-align: center;">
+				<view @click="toRankListUserInfoPage(todayBest.id)" class="best-main" style="margin-left: 130rpx;margin-top: 30rpx;">
+					<u-avatar :src="todayBest.avatar" size="40"></u-avatar>
+				</view>
+				<view @click="toRankListUserInfoPage(todayBest.id)" class="best-main-name" style="margin-top: 30rpx;text-align: center;">
 					<text style="font-size: 40rpx;color: coral;">{{ todayBest.userName }}</text>
 				</view>
 			</view>
 		</view>
 		<!-- 紧急寻物启事 -->
-		<view class="urgency-lost-titile" style="margin-left: 35rpx;margin-top: 100rpx;font-weight: 700;font-size: 45rpx;color: #ff0000;"><text>我真的很急o (≧口≦)o</text></view>
+		<view class="urgency-lost-titile" style="margin-left: 35rpx;margin-top: 50rpx;font-weight: 700;font-size: 45rpx;color: #ff0000;"><text>我真的很急o (≧口≦)o</text></view>
 		<view
 			class="urgency-lost"
 			style="height: 450rpx;backdrop-filter: blur(40px);
   color: #fff;
-  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
+  box-shadow: 0 0 30px 10px rgba(182, 182, 182, 0.3);background: rgba(255, 255, 255, 0.5);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
 		>
 			<view class="post-title" style="height: 50rpx;">
 				<view style="display: flex;margin-left: 530rpx;">
@@ -61,12 +71,12 @@
 			</view>
 		</view>
 		<!-- 非紧急寻物启事 -->
-		<view class="non-urgency-lost-titile" style="margin-left: 35rpx;margin-top: 70rpx;font-weight: 700;font-size: 45rpx;color: #939393;"><text>我丢了东西T_T</text></view>
+		<view class="non-urgency-lost-titile" style="margin-left: 35rpx;margin-top: 50rpx;font-weight: 700;font-size: 45rpx;color: #939393;"><text>我丢了东西T_T</text></view>
 		<view
 			class="non-urgency-lost"
 			style="height: 450rpx;backdrop-filter: blur(40px);
   color: #fff;
-  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
+  box-shadow: 0 0 30px 10px rgba(182, 182, 182, 0.3);background: rgba(255, 255, 255, 0.5);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
 		>
 			<view class="post-title" style="height: 50rpx;">
 				<view style="display: flex;margin-left: 540rpx;">
@@ -83,7 +93,7 @@
 			</view>
 		</view>
 		<!-- 拾物启事 -->
-		<view class="non-urgency-lost-titile" style="margin-left: 35rpx;margin-top: 70rpx;font-weight: 700;font-size: 45rpx;color: #939393;">
+		<view class="non-urgency-found-titile" style="margin-left: 35rpx;margin-top: 50rpx;font-weight: 700;font-size: 45rpx;color: #082dff;">
 			<text>我捡到东西啦(๑•̀ㅂ•́)و✧</text>
 		</view>
 
@@ -91,7 +101,7 @@
 			class="non-urgency-lost"
 			style="height: 450rpx;backdrop-filter: blur(40px);
   color: #fff;
-  box-shadow: 0 0 30px 10px rgba(130, 130, 130, 0.3);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
+  box-shadow: 0 0 30px 10px rgba(182, 182, 182, 0.3);background: rgba(255, 255, 255, 0.5);margin-top: 30rpx;margin-left: 20rpx;margin-right: 20rpx;border-radius: 20rpx;"
 		>
 			<view class="post-title" style="height: 50rpx;">
 				<view style="display: flex;margin-left: 540rpx;">
@@ -140,6 +150,7 @@ export default {
 			],
 			//今日最佳
 			todayBest: {
+				id: '1540533503228669954',
 				userName: 'Kamisora',
 				avatar: 'https://kamisora-bucker-1.oss-cn-hangzhou.aliyuncs.com/2022/06/12/e22baa33-df30-46d4-81bf-e6dcb44cb148.png'
 			},
@@ -172,9 +183,17 @@ export default {
 	methods: {
 		//前往启示详情界面
 		toNoticeDetailPage(noticeId) {
-			if (this.userIsLogin === true) {
+			if (this.userIsLogin) {
 				uni.navigateTo({
 					url: '/pages/detail/noticeDetail/noticeDetail' + '?id=' + noticeId
+				});
+			}
+		},
+		//点击排行榜用户前往该用户详情界面
+		toRankListUserInfoPage(userId) {
+			if (this.userIsLogin) {
+				uni.navigateTo({
+					url: '/pages/detail/personDetail/personalPage' + '?id=' + userId
 				});
 			}
 		},
@@ -246,5 +265,20 @@ export default {
 }
 .no3 {
 	color: #ff4aed;
+}
+.non-urgency-lost-titile {
+	width: 40%;
+	border-radius: 15rpx;
+	border: 2px solid #000000;
+}
+.urgency-lost-titile {
+	width: 57%;
+	border-radius: 15rpx;
+	border: 2px solid #ff0000;
+}
+.non-urgency-found-titile {
+	width: 65%;
+	border-radius: 15rpx;
+	border: 2px solid #00ffff;
 }
 </style>
