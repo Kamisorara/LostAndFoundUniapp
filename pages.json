@@ -145,6 +145,14 @@
 				"navigationBarBackgroundColor": "#fffdd8",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/inform/informDetail/informDetail",
+			"style": {
+				"navigationBarTitleText": "通知详情",
+				"navigationBarBackgroundColor": "#e2e1d4",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	//全局配置

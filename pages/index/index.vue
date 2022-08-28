@@ -129,7 +129,7 @@ export default {
 			loadMore: {
 				loadingText: '正在拼命加载中...',
 				loadmoreText: '上滑加载...',
-				nomoreText: '---------鄙人不才，实在没有了T_T---------'
+				nomoreText: '---------以完全加载完毕~~---------'
 			},
 			//启示列表
 			noticeList: [
