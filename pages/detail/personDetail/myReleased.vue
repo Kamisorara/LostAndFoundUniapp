@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { getUserHelpedNoticePage } from '@/common/api/laf/person.js';
+import { getUerReleasedNoticePage } from '@/common/api/laf/person.js';
 import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
 export default {
 	name: 'myReleased',
@@ -74,7 +74,7 @@ export default {
 		},
 		// （懒加载）用户发布notice列表
 		async getHelpedNoticeLists() {
-			await getUserHelpedNoticePage(this.userInfo.id, this.pageNum, this.pageSize).then(async res => {
+			await getUerReleasedNoticePage(this.userInfo.id, this.pageNum, this.pageSize).then(async res => {
 				console.log(res);
 				if (res.data.data.pages <= this.pageNum) {
 					this.status = 'nomore';

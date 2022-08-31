@@ -11,3 +11,9 @@ export function getUserPhoneNum(id) {
 export function getUserInfoPage(pageNum, pageSize) {
 	return request.get(urlHead + '/get-user-info-page' + "?pageNum=" + pageNum + "&pageSize=" + pageSize);
 }
+
+//根据消息id 获取消息详情
+export function getInfoDetail(infoId) {
+	return request.get(urlHead + "/get-info-detail" + "?id=" + infoId);
+}
+	

@@ -90,7 +90,7 @@ export default {
 			//验证码部分
 			tips: '',
 			// refCode: null,
-			seconds: 300,
+			seconds: 180,
 			//表单部分
 			model1: {
 				userInfo: {

@@ -46,16 +46,17 @@
 				</view>
 			</view>
 			<view
+				@click="phoneShow = true"
 				style="
           display: flex;
-          width: 180rpx;
+          width: 230rpx;
           background-color: #dddddd;
           border-radius: 30rpx;
-          margin: 50rpx 0 0 120rpx;
+          margin: 50rpx 0 0 90rpx;
         "
 			>
 				<u-icon size="25" name="chat"></u-icon>
-				<u--text size="15" text="发起会话"></u--text>
+				<u--text size="15" text="获取联系方式"></u--text>
 			</view>
 		</view>
 		<!-- 底部(未帮助)并且是自己自己发布的 -->
@@ -75,7 +76,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- 弹出层 -->
+		<!-- 弹出层（查找用户） -->
 		<view>
 			<u-popup mode="center" round="20" :show="show" @close="close" @open="open">
 				<view style="height: 650rpx; width: 700rpx">
@@ -111,6 +112,25 @@
 				</view>
 			</u-popup>
 		</view>
+		<!-- 弹出层（查询用户联系方式） -->
+		<view>
+			<u-popup mode="center" round="20" :show="phoneShow" @close="phoneClose()" @open="phoneOpen()">
+				<view style="height: 350rpx; width: 700rpx">
+					<view class="search_user_top" style="display: flex;">
+						<view v-if="userPhoneNumInfo.userPhoneNum === ''" class="get-info-button" style="margin: 130rpx;width: 30%;">
+							<u-button @click="getPhoneNum(noticeCreatedInfo.id)" type="primary" size="large" text="获取"></u-button>
+						</view>
+						<view v-if="userPhoneNumInfo.userPhoneNum != ''" class="userPhoneNum" style="margin: 140rpx;">
+							<view style="display: flex;">
+								<text style="font-size: 35rpx;">联系方式:</text>
+								<u-tooltip :text="userPhoneNumInfo.userPhoneNum" overlay></u-tooltip>
+							</view>
+							<view style="margin: 20rpx;"><text style="font-size: 20rpx;font-weight: 600;color:#7e7e7e;">该用户将会知晓您的操作</text></view>
+						</view>
+					</view>
+				</view>
+			</u-popup>
+		</view>
 		<!-- 底部(已帮助)大家都可以看到 -->
 		<view class="helped-end" v-if="noticeDetail.done === '0'">
 			<view style="width: 70%; display: flex">
@@ -137,6 +157,7 @@
 </template>
 
 <script>
+import { getUserPhoneNum } from '@/common/api/sys/info/info.js';
 import { getNoticeFoundNoticeDetail } from '@/common/api/laf/found.js';
 import { getLostNoticeDetail } from '@/common/api/laf/lost.js';
 import { virifyLoginStatus } from '@/common/api/sys/userInfo.js';
@@ -153,8 +174,10 @@ export default {
 			keyWords: '',
 			//是否可以返回
 			ifBackToIndexPage: false,
-			//弹出层
+			//弹出层（查找用户）
 			show: false,
+			//弹出层（查询用户联系方式）
+			phoneShow: false,
 			//上传图片列表
 			fileList1: [],
 			//启示发布者信息
@@ -189,7 +212,11 @@ export default {
 			//图片展示
 			albumWidth: 0,
 			//图片列表
-			noticePhotoList: []
+			noticePhotoList: [],
+			//用户联系方式信息
+			userPhoneNumInfo: {
+				userPhoneNum: ''
+			}
 		};
 	},
 	methods: {
@@ -247,12 +274,20 @@ export default {
 				});
 			});
 		},
-		//弹出层操作
+		//弹出层操作（查询用户）
 		open() {
 			// console.log('open');
 		},
 		close() {
 			this.show = false;
+			// console.log('close');
+		},
+		//弹出层（查询用户联系方式）
+		phoneOpen() {
+			// console.log('open');
+		},
+		phoneClose() {
+			this.phoneShow = false;
 			// console.log('close');
 		},
 		//返回index界面
@@ -328,6 +363,13 @@ export default {
 						message: res.data.msg
 					});
 				}
+			});
+		},
+		//获取用户联系方式
+		getPhoneNum(userId) {
+			getUserPhoneNum(userId).then(res => {
+				console.log(res);
+				this.userPhoneNumInfo.userPhoneNum = res.data.msg;
 			});
 		}
 	},

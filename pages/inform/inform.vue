@@ -9,7 +9,7 @@
 			</view>
 
 			<!-- 主体部分-->
-			<view @click="ToinformDetailPage()" class="info_mian" v-for="(item, index) in infoLists" :key="index">
+			<view @click="ToinformDetailPage(item.id, index)" class="info_mian" v-for="(item, index) in infoLists" :key="index">
 				<view class="info_top" style="display: flex;">
 					<view style="color: #949494;margin: 20rpx 0 0 20rpx;"><text>系统信息</text></view>
 					<view style="width: 72%;"></view>
@@ -99,9 +99,11 @@ export default {
 			});
 		},
 		//通知详情界面
-		ToinformDetailPage() {
+		ToinformDetailPage(infoId, index) {
+			//将小红点取消
+			this.infoLists[index].read = 0;
 			uni.navigateTo({
-				url: '/pages/inform/informDetail/informDetail'
+				url: '/pages/inform/informDetail/informDetail' + '?id=' + infoId
 			});
 		}
 	},
